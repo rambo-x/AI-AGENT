@@ -1,8 +1,11 @@
 """
 TripleSide AI Diagnostic Service
 
-Bridge between Telegram chat and AI analyzers.
+Bridge between Telegram chat and AI Agent reports.
 """
+
+
+import json
 
 from pathlib import Path
 
@@ -10,9 +13,14 @@ from pathlib import Path
 from ai.analyzers.health_analyzer import HealthAnalyzer
 from ai.analyzers.log_analyzer import LogAnalyzer
 
+from ai.telegram.response_formatter import ResponseFormatter
+
+
+
 
 
 class DiagnosticService:
+
 
 
     def __init__(
@@ -21,6 +29,40 @@ class DiagnosticService:
     ):
 
         self.root = Path(root)
+
+        self.formatter = ResponseFormatter()
+
+
+
+
+
+    def load_json(
+        self,
+        file
+    ):
+
+
+        if not file.exists():
+
+            return {}
+
+
+        try:
+
+            return json.loads(
+
+                file.read_text(
+                    encoding="utf-8"
+                )
+
+            )
+
+
+        except Exception:
+
+            return {}
+
+
 
 
 
@@ -33,6 +75,8 @@ class DiagnosticService:
         try:
 
 
+            # Basic realtime checks
+
             health_result = HealthAnalyzer(
                 self.root
             ).analyze()
@@ -43,20 +87,63 @@ class DiagnosticService:
 
 
 
-            if log_result:
+            # Load AI brain reports
 
-                system_status = "warning"
+            reasoning = self.load_json(
+
+                self.root /
+                "database/reasoning_report.json"
+
+            )
+
+
+
+            decision = self.load_json(
+
+                self.root /
+                "database/decision_report.json"
+
+            )
+
+
+
+            # If reports exist, use reasoning output
+
+            if reasoning and decision:
+
+
+                message = self.formatter.format(
+
+                    reasoning,
+
+                    decision
+
+                )
+
 
             else:
 
-                system_status = health_result.get(
-                    "health_status",
-                    "unknown"
+
+                message = (
+
+                    "🧠 TripleSide AI Diagnostic\n\n"
+
+                    f"Pertanyaan: {question}\n\n"
+
+                    f"Status sistem: "
+                    f"{health_result.get('health_status','unknown')}\n"
+
+                    f"Error ditemukan: "
+                    f"{len(log_result)}"
+
                 )
 
 
 
+
+
             return {
+
 
                 "status":
                     "diagnostic_complete",
@@ -66,40 +153,26 @@ class DiagnosticService:
                     question,
 
 
-                "system_status":
-                    system_status,
+                "message":
+                    message,
 
 
-                "issues_found":
-                    len(log_result),
-
-
-                "health_check":
+                "raw":
 
                     {
 
-                        "status":
-                            health_result.get(
-                                "health_status",
-                                "unknown"
-                            ),
+                        "health":
+                            health_result,
 
 
-                        "total_checks":
-                            len(
-                                health_result.get(
-                                    "checks",
-                                    []
-                                )
-                            )
+                        "errors":
+                            log_result[:5]
 
-                    },
-
-
-                "errors":
-                    log_result[:5]
+                    }
 
             }
+
+
 
 
 
@@ -108,12 +181,17 @@ class DiagnosticService:
 
             return {
 
+
                 "status":
                     "diagnostic_failed",
 
 
                 "question":
                     question,
+
+
+                "message":
+                    "Diagnostic gagal dijalankan.",
 
 
                 "error":

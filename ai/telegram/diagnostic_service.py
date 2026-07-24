@@ -2,6 +2,12 @@
 TripleSide AI Diagnostic Service
 
 Bridge between Telegram chat and AI Agent reports.
+
+Features:
+- realtime health check
+- log analysis
+- reasoning report integration
+- diagnostic memory awareness
 """
 
 
@@ -12,6 +18,8 @@ from pathlib import Path
 
 from ai.analyzers.health_analyzer import HealthAnalyzer
 from ai.analyzers.log_analyzer import LogAnalyzer
+
+from ai.memory.feedback import MemoryFeedback
 
 from ai.telegram.response_formatter import ResponseFormatter
 
@@ -32,6 +40,11 @@ class DiagnosticService:
 
         self.formatter = ResponseFormatter()
 
+        self.memory = MemoryFeedback(
+            root
+        )
+
+
 
 
 
@@ -45,6 +58,7 @@ class DiagnosticService:
         if not file.exists():
 
             return {}
+
 
 
         try:
@@ -66,6 +80,54 @@ class DiagnosticService:
 
 
 
+
+
+    def analyze_memory(
+        self,
+        errors
+    ):
+
+        results = []
+
+
+        for error in errors:
+
+
+            signature = error.get(
+                "signature",
+                ""
+            )
+
+
+            matches = self.memory.search(
+                signature
+            )
+
+
+            results.append({
+
+                "signature":
+                    signature,
+
+
+                "memory_found":
+                    len(matches),
+
+
+                "cases":
+                    matches[:3]
+
+            })
+
+
+        return results
+
+
+
+
+
+
+
     def run(
         self,
         question: str
@@ -75,7 +137,9 @@ class DiagnosticService:
         try:
 
 
-            # Basic realtime checks
+            # ---------------------------------
+            # Realtime health checks
+            # ---------------------------------
 
             health_result = HealthAnalyzer(
                 self.root
@@ -87,7 +151,21 @@ class DiagnosticService:
 
 
 
+            # ---------------------------------
+            # Memory awareness
+            # ---------------------------------
+
+            memory_result = self.analyze_memory(
+                log_result
+            )
+
+
+
+
+
+            # ---------------------------------
             # Load AI brain reports
+            # ---------------------------------
 
             reasoning = self.load_json(
 
@@ -95,7 +173,6 @@ class DiagnosticService:
                 "database/reasoning_report.json"
 
             )
-
 
 
             decision = self.load_json(
@@ -107,7 +184,12 @@ class DiagnosticService:
 
 
 
-            # If reports exist, use reasoning output
+
+
+
+            # ---------------------------------
+            # Generate response
+            # ---------------------------------
 
             if reasoning and decision:
 
@@ -142,6 +224,7 @@ class DiagnosticService:
 
 
 
+
             return {
 
 
@@ -149,12 +232,15 @@ class DiagnosticService:
                     "diagnostic_complete",
 
 
+
                 "question":
                     question,
 
 
+
                 "message":
                     message,
+
 
 
                 "raw":
@@ -165,10 +251,17 @@ class DiagnosticService:
                             health_result,
 
 
+
                         "errors":
-                            log_result[:5]
+                            log_result[:5],
+
+
+
+                        "memory":
+                            memory_result
 
                     }
+
 
             }
 
@@ -176,7 +269,9 @@ class DiagnosticService:
 
 
 
+
         except Exception as error:
+
 
 
             return {
@@ -186,12 +281,15 @@ class DiagnosticService:
                     "diagnostic_failed",
 
 
+
                 "question":
                     question,
 
 
+
                 "message":
                     "Diagnostic gagal dijalankan.",
+
 
 
                 "error":
