@@ -1,0 +1,396 @@
+{
+    "generated_at": "2026-07-24T09:26:32.283292",
+    "total_files": 30,
+    "parsed_files": 30,
+    "error_files": 0,
+    "files": [
+        {
+            "path": "ai/analyzers/__init__.py",
+            "imports": [],
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "ai/analyzers/project_analyzer.py",
+            "imports": [
+                "ai.indexer.scanner",
+                "collections",
+                "datetime",
+                "json",
+                "pathlib",
+                "typing"
+            ],
+            "classes": [
+                "ProjectAnalyzer"
+            ],
+            "functions": [
+                "__init__",
+                "analyze",
+                "load",
+                "save"
+            ],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "ai/core/__init__.py",
+            "imports": [],
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "ai/indexer/__init__.py",
+            "imports": [],
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "ai/indexer/scanner.py",
+            "imports": [
+                "datetime",
+                "json",
+                "pathlib",
+                "typing"
+            ],
+            "classes": [
+                "ProjectScanner"
+            ],
+            "functions": [
+                "__init__",
+                "_component",
+                "_language",
+                "load",
+                "save",
+                "scan"
+            ],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "ai/memory/__init__.py",
+            "imports": [],
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "ai/models/__init__.py",
+            "imports": [],
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "ai/prompts/__init__.py",
+            "imports": [],
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "ai/state_engine.py",
+            "imports": [
+                "copy",
+                "database.event_manager",
+                "database.state_manager"
+            ],
+            "classes": [
+                "StateEngine"
+            ],
+            "functions": [
+                "__init__",
+                "process"
+            ],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "ai/tools/__init__.py",
+            "imports": [],
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "app.py",
+            "imports": [
+                "config",
+                "monitor.loader",
+                "notifications.bot",
+                "scheduler.jobs",
+                "threading",
+                "utils.logger"
+            ],
+            "classes": [],
+            "functions": [
+                "start"
+            ],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "config.py",
+            "imports": [
+                "dotenv",
+                "os"
+            ],
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "database/__init__.py",
+            "imports": [],
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "database/event_manager.py",
+            "imports": [
+                "datetime",
+                "json",
+                "pathlib"
+            ],
+            "classes": [
+                "EventManager"
+            ],
+            "functions": [
+                "__init__",
+                "load",
+                "register",
+                "save"
+            ],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "database/state_manager.py",
+            "imports": [
+                "json",
+                "pathlib"
+            ],
+            "classes": [
+                "StateManager"
+            ],
+            "functions": [
+                "__init__",
+                "get",
+                "load",
+                "process",
+                "save",
+                "set"
+            ],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "events/__init__.py",
+            "imports": [],
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "events/dispatcher.py",
+            "imports": [
+                "notifications.notifier"
+            ],
+            "classes": [
+                "EventDispatcher"
+            ],
+            "functions": [
+                "__init__",
+                "dispatch"
+            ],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "monitor/__init__.py",
+            "imports": [],
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "monitor/backend.py",
+            "imports": [
+                "monitor.base",
+                "monitor.pm2.backend_monitor",
+                "utils.logger"
+            ],
+            "classes": [
+                "BackendMonitor"
+            ],
+            "functions": [
+                "__init__",
+                "check"
+            ],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "monitor/base.py",
+            "imports": [
+                "abc"
+            ],
+            "classes": [
+                "Monitor"
+            ],
+            "functions": [
+                "check"
+            ],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "monitor/loader.py",
+            "imports": [
+                "importlib",
+                "monitor.base",
+                "pkgutil"
+            ],
+            "classes": [],
+            "functions": [
+                "load_monitors"
+            ],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "monitor/pm2/backend_monitor.py",
+            "imports": [
+                "monitor.pm2.reader"
+            ],
+            "classes": [
+                "BackendMonitor"
+            ],
+            "functions": [
+                "check"
+            ],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "monitor/pm2/reader.py",
+            "imports": [
+                "json",
+                "subprocess"
+            ],
+            "classes": [
+                "PM2Reader"
+            ],
+            "functions": [
+                "read"
+            ],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "notifications/__init__.py",
+            "imports": [],
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "notifications/bot.py",
+            "imports": [
+                "config",
+                "database.state_manager",
+                "subprocess",
+                "telegram",
+                "telegram.ext"
+            ],
+            "classes": [],
+            "functions": [
+                "start_bot"
+            ],
+            "async_functions": [
+                "backend",
+                "confirm",
+                "logs",
+                "pm2",
+                "restart",
+                "restart",
+                "start",
+                "status"
+            ],
+            "syntax_error": null
+        },
+        {
+            "path": "notifications/notifier.py",
+            "imports": [
+                "config",
+                "requests"
+            ],
+            "classes": [
+                "TelegramNotifier"
+            ],
+            "functions": [
+                "send_event"
+            ],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "scheduler/__init__.py",
+            "imports": [],
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "scheduler/jobs.py",
+            "imports": [
+                "apscheduler.schedulers.blocking",
+                "database.state_manager",
+                "events.dispatcher"
+            ],
+            "classes": [],
+            "functions": [
+                "register_jobs",
+                "run_monitor"
+            ],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "utils/__init__.py",
+            "imports": [],
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "syntax_error": null
+        },
+        {
+            "path": "utils/logger.py",
+            "imports": [
+                "logging",
+                "pathlib"
+            ],
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "syntax_error": null
+        }
+    ],
+    "errors": []
+}
