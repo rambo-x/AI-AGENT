@@ -3,11 +3,11 @@ TripleSide AI Diagnostic Service
 
 Bridge between Telegram chat and AI Agent reports.
 
-Features:
-- realtime health check
+Includes:
+- health analysis
 - log analysis
-- reasoning report integration
-- diagnostic memory awareness
+- diagnostic memory
+- conversation context
 """
 
 
@@ -19,9 +19,11 @@ from pathlib import Path
 from ai.analyzers.health_analyzer import HealthAnalyzer
 from ai.analyzers.log_analyzer import LogAnalyzer
 
-from ai.memory.feedback import MemoryFeedback
 
 from ai.telegram.response_formatter import ResponseFormatter
+
+
+from ai.memory.context_manager import ContextManager
 
 
 
@@ -36,13 +38,17 @@ class DiagnosticService:
         root="."
     ):
 
+
         self.root = Path(root)
+
 
         self.formatter = ResponseFormatter()
 
-        self.memory = MemoryFeedback(
+
+        self.context = ContextManager(
             root
         )
+
 
 
 
@@ -82,51 +88,6 @@ class DiagnosticService:
 
 
 
-    def analyze_memory(
-        self,
-        errors
-    ):
-
-        results = []
-
-
-        for error in errors:
-
-
-            signature = error.get(
-                "signature",
-                ""
-            )
-
-
-            matches = self.memory.search(
-                signature
-            )
-
-
-            results.append({
-
-                "signature":
-                    signature,
-
-
-                "memory_found":
-                    len(matches),
-
-
-                "cases":
-                    matches[:3]
-
-            })
-
-
-        return results
-
-
-
-
-
-
 
     def run(
         self,
@@ -137,12 +98,33 @@ class DiagnosticService:
         try:
 
 
-            # ---------------------------------
-            # Realtime health checks
-            # ---------------------------------
+            # -------------------------
+            # Build context
+            # -------------------------
+
+            context = self.context.get_context(
+                question
+            )
+
+
+
+            context_summary = self.context.summarize(
+                context
+            )
+
+
+
+
+
+
+            # -------------------------
+            # Realtime checks
+            # -------------------------
 
             health_result = HealthAnalyzer(
+
                 self.root
+
             ).analyze()
 
 
@@ -151,21 +133,13 @@ class DiagnosticService:
 
 
 
-            # ---------------------------------
-            # Memory awareness
-            # ---------------------------------
-
-            memory_result = self.analyze_memory(
-                log_result
-            )
 
 
 
 
-
-            # ---------------------------------
-            # Load AI brain reports
-            # ---------------------------------
+            # -------------------------
+            # Load AI reports
+            # -------------------------
 
             reasoning = self.load_json(
 
@@ -173,6 +147,7 @@ class DiagnosticService:
                 "database/reasoning_report.json"
 
             )
+
 
 
             decision = self.load_json(
@@ -187,9 +162,10 @@ class DiagnosticService:
 
 
 
-            # ---------------------------------
-            # Generate response
-            # ---------------------------------
+
+            # -------------------------
+            # Format response
+            # -------------------------
 
             if reasoning and decision:
 
@@ -198,10 +174,10 @@ class DiagnosticService:
 
                     reasoning,
 
-                    decision,
-		    
-		    memory_result
+                    decision
+
                 )
+
 
 
             else:
@@ -226,20 +202,49 @@ class DiagnosticService:
 
 
 
+            # -------------------------
+            # Add context information
+            # -------------------------
+
+            if context_summary:
+
+
+                message += "\n\n🧠 Context Memory:\n"
+
+
+                for item in context_summary:
+
+
+                    message += (
+
+                        f"• {item}\n"
+
+                    )
+
+
+
+
+
+
+
+
             return {
 
 
                 "status":
+
                     "diagnostic_complete",
 
 
 
                 "question":
+
                     question,
 
 
 
                 "message":
+
                     message,
 
 
@@ -249,22 +254,26 @@ class DiagnosticService:
                     {
 
                         "health":
+
                             health_result,
 
 
 
                         "errors":
+
                             log_result[:5],
 
 
 
-                        "memory":
-                            memory_result
+                        "context":
+
+                            context
 
                     }
 
-
             }
+
+
 
 
 
@@ -279,21 +288,25 @@ class DiagnosticService:
 
 
                 "status":
+
                     "diagnostic_failed",
 
 
 
                 "question":
+
                     question,
 
 
 
                 "message":
+
                     "Diagnostic gagal dijalankan.",
 
 
 
                 "error":
+
                     str(error)
 
             }
