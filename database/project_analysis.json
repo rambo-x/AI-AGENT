@@ -1,10 +1,10 @@
 {
-    "generated_at": "2026-07-24T14:23:09.383609",
+    "generated_at": "2026-07-24T15:23:09.786038",
     "total_components": 8,
     "components": {
         "ai": {
-            "files": 55,
-            "python_files": 54,
+            "files": 64,
+            "python_files": 57,
             "languages": [
                 "python",
                 "unknown"

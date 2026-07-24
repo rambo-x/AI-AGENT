@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-07-24T14:23:09.386503",
+    "generated_at": "2026-07-24T15:23:09.789024",
     "architecture_type": "modular_python_application",
     "entry_points": [
         "app.py"
@@ -31,7 +31,9 @@
             "ai/learning/improvement_engine.py",
             "ai/memory/__init__.py",
             "ai/memory/feedback.py",
+            "ai/memory/feedback.py.backup",
             "ai/memory/knowledge.py",
+            "ai/memory/knowledge.py.backup",
             "ai/memory/memory_enricher.py",
             "ai/memory/memory_normalizer.py",
             "ai/models/__init__.py",
@@ -59,7 +61,14 @@
             "ai/telegram/__init__.py",
             "ai/telegram/bot_engine.py",
             "ai/telegram/chat_router.py",
+            "ai/telegram/chat_router.py.backup",
+            "ai/telegram/diagnostic_service.py",
+            "ai/telegram/diagnostic_service.py.backup",
+            "ai/telegram/diagnostic_service.py.backup2",
+            "ai/telegram/intent_router.py",
+            "ai/telegram/response_formatter.py",
             "ai/telegram/telegram_runner.py",
+            "ai/telegram/telegram_runner.py.backup",
             "ai/tools/__init__.py"
         ],
         "monitor": [

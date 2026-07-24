@@ -198,9 +198,8 @@ class DiagnosticService:
 
                     reasoning,
 
-                    decision,
-		    
-		    memory_result
+                    decision
+
                 )
 
 

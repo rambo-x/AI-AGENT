@@ -1,8 +1,8 @@
 {
     "root": "/home/triplesidestudio/tripleside-ai-agent",
-    "generated_at": "2026-07-24T14:23:09.380509",
-    "total_files": 105,
-    "python_files": 74,
+    "generated_at": "2026-07-24T15:23:09.780079",
+    "total_files": 114,
+    "python_files": 77,
     "folders": [
         "ai",
         "ai/analyzers",
@@ -339,8 +339,19 @@
             "depth": 3,
             "language": "python",
             "extension": ".py",
+            "size": 5194,
+            "modified": "2026-07-24T15:11:34.553460"
+        },
+        {
+            "path": "ai/memory/feedback.py.backup",
+            "filename": "feedback.py.backup",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "unknown",
+            "extension": ".backup",
             "size": 3923,
-            "modified": "2026-07-24T12:05:49.483824"
+            "modified": "2026-07-24T15:10:01.552610"
         },
         {
             "path": "ai/memory/knowledge.py",
@@ -352,6 +363,17 @@
             "extension": ".py",
             "size": 3030,
             "modified": "2026-07-24T09:47:00.352905"
+        },
+        {
+            "path": "ai/memory/knowledge.py.backup",
+            "filename": "knowledge.py.backup",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "unknown",
+            "extension": ".backup",
+            "size": 3030,
+            "modified": "2026-07-24T15:08:54.363682"
         },
         {
             "path": "ai/memory/memory_enricher.py",
@@ -647,8 +669,74 @@
             "depth": 3,
             "language": "python",
             "extension": ".py",
-            "size": 1626,
-            "modified": "2026-07-24T14:09:56.385961"
+            "size": 2841,
+            "modified": "2026-07-24T15:04:25.826554"
+        },
+        {
+            "path": "ai/telegram/chat_router.py.backup",
+            "filename": "chat_router.py.backup",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "unknown",
+            "extension": ".backup",
+            "size": 2548,
+            "modified": "2026-07-24T15:03:27.892415"
+        },
+        {
+            "path": "ai/telegram/diagnostic_service.py",
+            "filename": "diagnostic_service.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 4158,
+            "modified": "2026-07-24T15:21:54.896506"
+        },
+        {
+            "path": "ai/telegram/diagnostic_service.py.backup",
+            "filename": "diagnostic_service.py.backup",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "unknown",
+            "extension": ".backup",
+            "size": 2756,
+            "modified": "2026-07-24T15:13:53.984143"
+        },
+        {
+            "path": "ai/telegram/diagnostic_service.py.backup2",
+            "filename": "diagnostic_service.py.backup2",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "unknown",
+            "extension": ".backup2",
+            "size": 4131,
+            "modified": "2026-07-24T15:19:51.175985"
+        },
+        {
+            "path": "ai/telegram/intent_router.py",
+            "filename": "intent_router.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 1488,
+            "modified": "2026-07-24T15:02:18.048179"
+        },
+        {
+            "path": "ai/telegram/response_formatter.py",
+            "filename": "response_formatter.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 4003,
+            "modified": "2026-07-24T15:18:22.914307"
         },
         {
             "path": "ai/telegram/telegram_runner.py",
@@ -658,8 +746,19 @@
             "depth": 3,
             "language": "python",
             "extension": ".py",
-            "size": 2764,
-            "modified": "2026-07-24T14:12:36.163480"
+            "size": 3057,
+            "modified": "2026-07-24T14:53:22.156918"
+        },
+        {
+            "path": "ai/telegram/telegram_runner.py.backup",
+            "filename": "telegram_runner.py.backup",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "unknown",
+            "extension": ".backup",
+            "size": 3942,
+            "modified": "2026-07-24T14:47:39.239235"
         },
         {
             "path": "ai/tools/__init__.py",
@@ -714,7 +813,7 @@
             "language": "json",
             "extension": ".json",
             "size": 4626,
-            "modified": "2026-07-24T13:23:09.010041"
+            "modified": "2026-07-24T14:23:09.405432"
         },
         {
             "path": "database/agent_state.json",
@@ -725,7 +824,7 @@
             "language": "json",
             "extension": ".json",
             "size": 224,
-            "modified": "2026-07-24T13:23:09.010041"
+            "modified": "2026-07-24T14:23:09.405432"
         },
         {
             "path": "database/architecture.json",
@@ -735,8 +834,8 @@
             "depth": 2,
             "language": "json",
             "extension": ".json",
-            "size": 4644,
-            "modified": "2026-07-24T13:23:08.910042"
+            "size": 4686,
+            "modified": "2026-07-24T14:23:09.386432"
         },
         {
             "path": "database/backup/test_20260724_113755.json",
@@ -758,7 +857,7 @@
             "language": "json",
             "extension": ".json",
             "size": 2248,
-            "modified": "2026-07-24T13:23:08.923042"
+            "modified": "2026-07-24T14:23:09.399432"
         },
         {
             "path": "database/dependency_graph.json",
@@ -769,7 +868,7 @@
             "language": "json",
             "extension": ".json",
             "size": 4840,
-            "modified": "2026-07-24T13:23:08.909042"
+            "modified": "2026-07-24T14:23:09.384432"
         },
         {
             "path": "database/diagnostic_memory.json",
@@ -779,8 +878,8 @@
             "depth": 2,
             "language": "json",
             "extension": ".json",
-            "size": 1091,
-            "modified": "2026-07-24T11:49:19.142855"
+            "size": 1249,
+            "modified": "2026-07-24T15:11:55.759418"
         },
         {
             "path": "database/diagnostics.json",
@@ -823,8 +922,8 @@
             "depth": 2,
             "language": "json",
             "extension": ".json",
-            "size": 3976,
-            "modified": "2026-07-24T13:23:08.926042"
+            "size": 4756,
+            "modified": "2026-07-24T14:23:09.403432"
         },
         {
             "path": "database/experience.json",
@@ -846,7 +945,7 @@
             "language": "json",
             "extension": ".json",
             "size": 688,
-            "modified": "2026-07-24T13:23:09.009041"
+            "modified": "2026-07-24T14:23:09.404432"
         },
         {
             "path": "database/health_report.json",
@@ -857,7 +956,7 @@
             "language": "json",
             "extension": ".json",
             "size": 966,
-            "modified": "2026-07-24T13:23:08.922042"
+            "modified": "2026-07-24T14:23:09.398432"
         },
         {
             "path": "database/knowledge.json",
@@ -879,7 +978,7 @@
             "language": "json",
             "extension": ".json",
             "size": 1074,
-            "modified": "2026-07-24T13:23:09.009041"
+            "modified": "2026-07-24T14:23:09.404432"
         },
         {
             "path": "database/log_analysis.json",
@@ -890,7 +989,7 @@
             "language": "json",
             "extension": ".json",
             "size": 1311,
-            "modified": "2026-07-24T13:23:08.921042"
+            "modified": "2026-07-24T14:23:09.397432"
         },
         {
             "path": "database/memory_enriched_report.json",
@@ -934,7 +1033,7 @@
             "language": "json",
             "extension": ".json",
             "size": 1490,
-            "modified": "2026-07-24T13:23:08.907042"
+            "modified": "2026-07-24T14:23:09.383432"
         },
         {
             "path": "database/project_index.json",
@@ -944,8 +1043,8 @@
             "depth": 2,
             "language": "json",
             "extension": ".json",
-            "size": 36507,
-            "modified": "2026-07-24T13:23:08.906042"
+            "size": 36850,
+            "modified": "2026-07-24T14:23:09.382432"
         },
         {
             "path": "database/python_index.json",
@@ -967,7 +1066,7 @@
             "language": "json",
             "extension": ".json",
             "size": 1066,
-            "modified": "2026-07-24T13:23:08.923042"
+            "modified": "2026-07-24T14:23:09.400432"
         },
         {
             "path": "database/state.json",
@@ -978,7 +1077,7 @@
             "language": "json",
             "extension": ".json",
             "size": 456,
-            "modified": "2026-07-24T14:22:59.126508"
+            "modified": "2026-07-24T15:22:59.126247"
         },
         {
             "path": "database/state_manager.py",

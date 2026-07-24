@@ -150,6 +150,31 @@
                     "status": "pending"
                 }
             ]
+        },
+        {
+            "timestamp": "2026-07-24T15:23:09.807469",
+            "problem": "telegram_token",
+            "status": "simulated",
+            "priority": "high",
+            "estimated_time": "2 minutes",
+            "actions": [
+                {
+                    "step": "Check TELEGRAM_BOT_TOKEN",
+                    "status": "pending"
+                },
+                {
+                    "step": "Update invalid token",
+                    "status": "pending"
+                },
+                {
+                    "step": "Restart AI Agent",
+                    "status": "pending"
+                },
+                {
+                    "step": "Verify Telegram Bot",
+                    "status": "pending"
+                }
+            ]
         }
     ]
 }

@@ -7,7 +7,6 @@ Supports:
 - reasoning reports
 - decision reports
 - incident memory status
-- memory deduplication
 """
 
 
@@ -34,6 +33,7 @@ class ResponseFormatter:
         lines.append(
             ""
         )
+
 
 
         diagnoses = reasoning.get(
@@ -81,21 +81,17 @@ class ResponseFormatter:
 
 
 
-
-
-        # ---------------------------------
-        # Memory Incident Status
-        # ---------------------------------
+        # -----------------------------
+        # Incident Memory Status
+        # -----------------------------
 
         if memory:
 
 
             resolved = []
 
+
             active = []
-
-            seen = set()
-
 
 
             for item in memory:
@@ -105,23 +101,6 @@ class ResponseFormatter:
                     "cases",
                     []
                 ):
-
-
-                    key = case.get(
-                        "problem",
-                        "-"
-                    )
-
-
-                    if key in seen:
-
-                        continue
-
-
-                    seen.add(
-                        key
-                    )
-
 
 
                     if case.get(
@@ -135,12 +114,9 @@ class ResponseFormatter:
 
                     else:
 
-
                         active.append(
                             case
                         )
-
-
 
 
 
@@ -157,12 +133,10 @@ class ResponseFormatter:
                 )
 
 
-
                 for case in resolved:
 
 
                     lines.append(
-
                         "✅ "
                         +
                         case.get(
@@ -171,9 +145,7 @@ class ResponseFormatter:
                         )
                         +
                         " sudah resolved"
-
                     )
-
 
 
                     if case.get(
@@ -182,16 +154,12 @@ class ResponseFormatter:
 
 
                         lines.append(
-
                             "  "
                             +
                             case.get(
                                 "resolution"
                             )
-
                         )
-
-
 
 
 
@@ -208,22 +176,17 @@ class ResponseFormatter:
                 )
 
 
-
                 for case in active:
 
 
                     lines.append(
-
                         "• "
                         +
                         case.get(
                             "problem",
                             "-"
                         )
-
                     )
-
-
 
 
 
@@ -242,14 +205,12 @@ class ResponseFormatter:
             )
 
 
-
             for item in decisions:
 
 
                 root = item.get(
                     "root_cause"
                 )
-
 
 
                 if root:
@@ -267,15 +228,12 @@ class ResponseFormatter:
                 )
 
 
-
                 for rec in recommendations:
 
 
                     lines.append(
                         f"  - {rec}"
                     )
-
-
 
 
 
