@@ -25,3 +25,10 @@ database/*.sqlite3
 # OS
 .DS_Store
 Thumbs.db
+
+
+database/state.json
+database/events.json
+logs/
+__pycache__/
+*.pyc
