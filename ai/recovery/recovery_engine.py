@@ -3,16 +3,17 @@ Recovery Engine
 
 Convert detected issues into approved action requests.
 
-Version 2:
+Version 3:
 - Uses Action ID registry
-- Compatible with ActionEngine whitelist
 - Approval aware
+- Incident memory integration
 """
 
 from datetime import datetime
 
 from ai.executor.action_engine import ActionEngine
 from ai.approval.approval_engine import ApprovalEngine
+from ai.memory.incident_memory import IncidentMemory
 
 
 
@@ -27,6 +28,8 @@ class RecoveryEngine:
         self.action_engine = ActionEngine(root)
 
         self.approval_engine = ApprovalEngine(root)
+
+        self.memory = IncidentMemory(root)
 
 
 
@@ -51,8 +54,25 @@ class RecoveryEngine:
         )
 
 
-        action_id = None
+        previous = self.memory.find_similar(
+            problem
+        )
 
+
+
+        memory_info = {
+
+            "previous_incidents":
+                len(previous),
+
+            "found":
+                len(previous) > 0
+
+        }
+
+
+
+        action_id = None
 
 
         problem_lower = problem.lower()
@@ -63,9 +83,7 @@ class RecoveryEngine:
 
 
             action_id = (
-
                 "check_backend_logs"
-
             )
 
 
@@ -74,9 +92,7 @@ class RecoveryEngine:
 
 
             action_id = (
-
                 "check_telegram_config"
-
             )
 
 
@@ -85,9 +101,7 @@ class RecoveryEngine:
 
 
             action_id = (
-
                 "pm2_restart_ai_agent"
-
             )
 
 
@@ -107,22 +121,18 @@ class RecoveryEngine:
             return {
 
                 "timestamp":
-
                     datetime.now().isoformat(),
 
-
                 "problem":
-
                     problem,
 
+                "memory":
+                    memory_info,
 
                 "status":
-
                     "no_action",
 
-
                 "message":
-
                     "No recovery action available"
 
             }
@@ -143,33 +153,28 @@ class RecoveryEngine:
 
 
 
+
         if not action_definition:
 
 
             return {
 
                 "timestamp":
-
                     datetime.now().isoformat(),
 
-
                 "problem":
-
                     problem,
 
-
                 "action_id":
-
                     action_id,
 
+                "memory":
+                    memory_info,
 
                 "status":
-
                     "blocked",
 
-
                 "message":
-
                     "Action not registered"
 
             }
@@ -178,10 +183,6 @@ class RecoveryEngine:
 
 
 
-        #
-        # Approval required
-        #
-
         if action_definition.get(
 
             "require_approval",
@@ -189,6 +190,7 @@ class RecoveryEngine:
             False
 
         ):
+
 
 
             approval = self.approval_engine.create_request(
@@ -205,108 +207,38 @@ class RecoveryEngine:
 
 
                 "timestamp":
-
                     datetime.now().isoformat(),
 
 
                 "problem":
-
                     problem,
 
 
                 "action_id":
-
                     action_id,
 
 
-                "status":
+                "memory":
+                    memory_info,
 
+
+                "status":
                     "waiting_approval",
 
 
                 "approval":
-
                     approval,
 
 
                 "execution":
-
                     {
 
                         "status":
-
                             "waiting_approval",
 
                         "message":
-
                             "Action requires admin approval"
 
                     }
 
             }
-
-
-
-
-
-        #
-        # Direct safe action
-        #
-
-        execution = self.action_engine.execute(
-
-            action_id
-
-        )
-
-
-
-        return {
-
-
-            "timestamp":
-
-                datetime.now().isoformat(),
-
-
-            "problem":
-
-                problem,
-
-
-            "action_id":
-
-                action_id,
-
-
-            "execution":
-
-                execution
-
-        }
-
-
-
-
-
-if __name__ == "__main__":
-
-
-    engine = RecoveryEngine()
-
-
-
-    result = engine.decide(
-
-        {
-
-            "problem":
-
-                "tripleside-ai-agent previous crash detected"
-
-        }
-
-    )
-
-
-    print(result)
