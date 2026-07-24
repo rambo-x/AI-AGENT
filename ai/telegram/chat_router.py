@@ -2,6 +2,13 @@
 Telegram Natural Language Router
 
 Routes free text messages into AI services.
+
+Supports:
+- diagnostic
+- report
+- status
+- help
+- fallback conversation
 """
 
 
@@ -55,18 +62,39 @@ class TelegramChatRouter:
 
 
 
+        # -----------------------------
+        # Diagnostic request
+        # -----------------------------
+
         if intent_name == "diagnostic":
 
 
             return self.diagnostic.run(
-
                 message
-
             )
 
 
 
 
+
+        # -----------------------------
+        # Status request
+        # -----------------------------
+
+        if intent_name == "status":
+
+
+            return self.diagnostic.run(
+                message
+            )
+
+
+
+
+
+        # -----------------------------
+        # Report request
+        # -----------------------------
 
         if intent_name == "report":
 
@@ -76,6 +104,10 @@ class TelegramChatRouter:
 
 
 
+
+        # -----------------------------
+        # Help request
+        # -----------------------------
 
         if intent_name == "help":
 
@@ -89,12 +121,19 @@ class TelegramChatRouter:
 
                 "message":
                     (
-                        "Perintah yang tersedia:\n\n"
+                        "🧠 TripleSide AI Agent\n\n"
+
+                        "Contoh pertanyaan:\n\n"
+
+                        "• cek server\n"
+                        "• apakah ada error?\n"
+                        "• kenapa sistem lambat?\n"
+                        "• buat laporan\n\n"
+
+                        "Command:\n"
                         "/status\n"
                         "/report\n"
-                        "/help\n\n"
-                        "Anda juga bisa bertanya bebas "
-                        "tentang kondisi sistem."
+                        "/help"
                     )
 
             }
@@ -103,11 +142,17 @@ class TelegramChatRouter:
 
 
 
+
+        # -----------------------------
+        # Unknown conversation
+        # -----------------------------
+
         return {
 
 
             "status":
                 "understood",
+
 
 
             "message":
@@ -134,9 +179,7 @@ class TelegramChatRouter:
 
 
         path = Path(
-
             "database/state.json"
-
         )
 
 
@@ -149,7 +192,6 @@ class TelegramChatRouter:
                 path.read_text()
 
             )
-
 
 
             return {
@@ -192,9 +234,7 @@ class TelegramChatRouter:
 
 
         path = Path(
-
             "database/final_report.json"
-
         )
 
 
@@ -207,7 +247,6 @@ class TelegramChatRouter:
                 path.read_text()
 
             )
-
 
 
             return {
