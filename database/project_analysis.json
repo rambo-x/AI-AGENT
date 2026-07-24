@@ -1,16 +1,17 @@
 {
-    "generated_at": "2026-07-24T09:09:00.854723",
+    "generated_at": "2026-07-24T10:26:21.567922",
     "total_components": 8,
     "components": {
         "ai": {
-            "files": 10,
-            "python_files": 10,
+            "files": 21,
+            "python_files": 20,
             "languages": [
-                "python"
+                "python",
+                "unknown"
             ]
         },
         "database": {
-            "files": 7,
+            "files": 17,
             "python_files": 3,
             "languages": [
                 "json",

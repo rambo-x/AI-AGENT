@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-07-24T09:33:33.291533",
+    "generated_at": "2026-07-24T10:26:21.569559",
     "nodes": [
         "ai/analyzers/__init__.py",
         "ai/analyzers/project_analyzer.py",

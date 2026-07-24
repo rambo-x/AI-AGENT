@@ -1,0 +1,46 @@
+{
+    "generated_at": "2026-07-24T10:26:21.219701",
+    "status": "completed",
+    "pipeline": [
+        {
+            "step": "project_scanner",
+            "status": "success",
+            "output": "database/project_index.json"
+        },
+        {
+            "step": "project_analyzer",
+            "status": "success",
+            "output": "database/project_analysis.json"
+        },
+        {
+            "step": "dependency_analyzer",
+            "status": "success",
+            "output": "database/dependency_graph.json"
+        },
+        {
+            "step": "architecture_analyzer",
+            "status": "success",
+            "output": "database/architecture.json"
+        },
+        {
+            "step": "log_analyzer",
+            "status": "success",
+            "output": "database/log_analysis.json"
+        },
+        {
+            "step": "health_analyzer",
+            "status": "success",
+            "output": "database/health_report.json"
+        },
+        {
+            "step": "decision_engine",
+            "status": "success",
+            "output": "database/decision_report.json"
+        },
+        {
+            "step": "reasoning_engine",
+            "status": "success",
+            "output": "database/reasoning_report.json"
+        }
+    ]
+}

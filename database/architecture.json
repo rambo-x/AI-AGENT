@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-07-24T09:38:13.241149",
+    "generated_at": "2026-07-24T10:26:21.570676",
     "architecture_type": "modular_python_application",
     "entry_points": [
         "app.py"
@@ -7,11 +7,22 @@
     "layers": {
         "ai": [
             "ai/analyzers/__init__.py",
+            "ai/analyzers/architecture_analyzer.py",
+            "ai/analyzers/dependency_analyzer.py",
+            "ai/analyzers/diagnostic_engine.py",
+            "ai/analyzers/health_analyzer.py",
+            "ai/analyzers/log_analyzer.py",
             "ai/analyzers/project_analyzer.py",
             "ai/core/__init__.py",
+            "ai/core/decision_engine.py",
+            "ai/core/orchestrator.py",
+            "ai/core/reasoning.py",
+            "ai/core/reasoning.py.v1.0",
             "ai/indexer/__init__.py",
+            "ai/indexer/parser.py",
             "ai/indexer/scanner.py",
             "ai/memory/__init__.py",
+            "ai/memory/knowledge.py",
             "ai/models/__init__.py",
             "ai/prompts/__init__.py",
             "ai/state_engine.py",
@@ -27,10 +38,20 @@
         ],
         "database": [
             "database/__init__.py",
+            "database/agent_report.json",
+            "database/architecture.json",
+            "database/decision_report.json",
+            "database/dependency_graph.json",
+            "database/diagnostic_memory.json",
+            "database/diagnostics.json",
             "database/event_manager.py",
             "database/events.json",
+            "database/health_report.json",
+            "database/log_analysis.json",
             "database/project_analysis.json",
             "database/project_index.json",
+            "database/python_index.json",
+            "database/reasoning_report.json",
             "database/state.json",
             "database/state_manager.py"
         ],
