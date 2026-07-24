@@ -1,154 +1,200 @@
 """
-TripleSide AI Agent Telegram Runner
+Telegram Runner
 
-Telegram interface for AI diagnostic assistant.
+Telegram interface for TripleSide AI Agent.
+
+Commands:
+    /status
+    /report
+    /help
+    /approvals
 """
 
-
-import os
-import sys
 import json
 
-from pathlib import Path
-
-from dotenv import load_dotenv
-
-
-BASE_DIR = Path(__file__).resolve().parents[2]
-
-sys.path.insert(
-    0,
-    str(BASE_DIR)
-)
-
-os.chdir(BASE_DIR)
-
-
-load_dotenv(
-    BASE_DIR / ".env"
-)
-
-
 from telegram import Update
-
 from telegram.ext import (
     Application,
     CommandHandler,
     MessageHandler,
     ContextTypes,
-    filters,
+    filters
 )
 
+from config import TELEGRAM_BOT_TOKEN as TOKEN
 
-from ai.telegram.bot_engine import TelegramBotEngine
-
-from ai.telegram.chat_router import TelegramChatRouter
-
-
-
-TOKEN = os.getenv(
-    "TELEGRAM_BOT_TOKEN"
-)
+from ai.storage.storage import Storage
 
 
 
-bot_engine = TelegramBotEngine()
-
-chat_router = TelegramChatRouter()
-
-
-
-
+# ==================================================
+# COMMAND: /status
+# ==================================================
 
 async def status_command(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE
 ):
 
-    result = bot_engine.handle_command(
-        "/status"
-    )
-
-
     await update.message.reply_text(
-        json.dumps(
-            result,
-            indent=2,
-            ensure_ascii=False
-        )
+        "TripleSide AI Agent is online."
     )
 
 
 
-
-
+# ==================================================
+# COMMAND: /report
+# ==================================================
 
 async def report_command(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE
 ):
 
-    result = bot_engine.handle_command(
-        "/report"
+    storage = Storage(".")
+
+
+    report = storage.load(
+        "decision_report.json",
+        {}
     )
 
 
     await update.message.reply_text(
+
         json.dumps(
-            result,
+            report,
             indent=2,
             ensure_ascii=False
         )[:4000]
+
     )
 
 
 
-
-
+# ==================================================
+# COMMAND: /help
+# ==================================================
 
 async def help_command(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE
 ):
 
-    result = bot_engine.handle_command(
-        "/help"
+    message = """
+TripleSide AI Agent Commands:
+
+/status
+System status
+
+/report
+Latest AI decision report
+
+/approvals
+Show pending approval requests
+"""
+
+    await update.message.reply_text(
+        message
     )
+
+
+
+# ==================================================
+# COMMAND: /approvals
+# ==================================================
+
+async def approvals_command(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+):
+
+    storage = Storage(".")
+
+
+    data = storage.load(
+        "approval_requests.json",
+        {
+            "requests":[]
+        }
+    )
+
+
+    requests = data.get(
+        "requests",
+        []
+    )
+
+
+    pending = [
+
+        item
+
+        for item in requests
+
+        if item.get("status") == "pending"
+
+    ]
+
+
+
+    if not pending:
+
+        await update.message.reply_text(
+            "Tidak ada approval pending."
+        )
+
+        return
+
+
+
+    message = (
+        "Pending Approval:\n\n"
+    )
+
+
+    for item in pending:
+
+        message += (
+
+            f"ID:\n"
+            f"{item.get('id')}\n\n"
+
+            f"Problem:\n"
+            f"{item.get('problem')}\n\n"
+
+            f"Action:\n"
+            f"{item.get('action')}\n\n"
+
+            f"Status:\n"
+            f"{item.get('status')}\n"
+
+            "----------------\n\n"
+
+        )
 
 
     await update.message.reply_text(
-        json.dumps(
-            result,
-            indent=2,
-            ensure_ascii=False
-        )
+        message[:4000]
     )
 
 
 
-
-
+# ==================================================
+# TEXT HANDLER
+# ==================================================
 
 async def text_message_handler(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE
 ):
 
+    result = {
 
-    if not update.message:
+        "message":
+            "Command tidak dikenal. Gunakan /help"
 
-        return
-
-
-
-    message = update.message.text
-
-
-
-    result = chat_router.process(
-        message
-    )
-
+    }
 
 
     if isinstance(result, dict) and "message" in result:
@@ -163,19 +209,20 @@ async def text_message_handler(
 
 
         await update.message.reply_text(
+
             json.dumps(
                 result,
                 indent=2,
                 ensure_ascii=False
             )[:4000]
+
         )
 
 
 
-
-
-
-
+# ==================================================
+# MAIN
+# ==================================================
 
 def main():
 
@@ -234,6 +281,17 @@ def main():
 
     app.add_handler(
 
+        CommandHandler(
+            "approvals",
+            approvals_command
+        )
+
+    )
+
+
+
+    app.add_handler(
+
         MessageHandler(
             filters.TEXT & ~filters.COMMAND,
             text_message_handler
@@ -249,10 +307,9 @@ def main():
 
 
 
-    app.run_polling()
-
-
-
+    app.run_polling(
+        stop_signals=None
+    )
 
 
 

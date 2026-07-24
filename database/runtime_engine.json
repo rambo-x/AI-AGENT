@@ -1,0 +1,78 @@
+{
+    "generated_at": "2026-07-24T18:10:45.871422",
+    "system": "TripleSide AI Agent",
+    "status": "READY",
+    "brain_loaded": true,
+    "decisions_loaded": true,
+    "reasoning": [
+        {
+            "type": "architecture_analysis",
+            "result": [
+                {
+                    "layer": "entrypoint",
+                    "modules": 1
+                },
+                {
+                    "layer": "scheduler",
+                    "modules": 5
+                },
+                {
+                    "layer": "telegram",
+                    "modules": 7
+                },
+                {
+                    "layer": "memory",
+                    "modules": 8
+                },
+                {
+                    "layer": "analyzers",
+                    "modules": 7
+                },
+                {
+                    "layer": "core",
+                    "modules": 4
+                },
+                {
+                    "layer": "executor",
+                    "modules": 2
+                },
+                {
+                    "layer": "knowledge",
+                    "modules": 2
+                },
+                {
+                    "layer": "storage",
+                    "modules": 2
+                }
+            ]
+        },
+        {
+            "type": "decision_analysis",
+            "problem": "Telegram authentication failure",
+            "severity": "warning"
+        },
+        {
+            "type": "decision_analysis",
+            "problem": "System healthy",
+            "severity": "info"
+        }
+    ],
+    "actions": [
+        {
+            "problem": "Telegram authentication failure",
+            "severity": "warning",
+            "recovery_available": true,
+            "recommended_action": "Check TELEGRAM_BOT_TOKEN",
+            "execution": {
+                "timestamp": "2026-07-24T18:10:45.871475",
+                "action": "Check TELEGRAM_BOT_TOKEN",
+                "status": "simulated",
+                "message": "Action approved but execution disabled in safe mode"
+            }
+        },
+        {
+            "problem": "System healthy",
+            "action": "monitor"
+        }
+    ]
+}

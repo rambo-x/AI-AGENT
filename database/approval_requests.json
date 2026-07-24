@@ -1,0 +1,48 @@
+{
+    "created_at": "2026-07-24T18:12:35.703637",
+    "requests": [
+        {
+            "id": "458fbb0e-b67a-4cbd-b908-26b00e27c0a5",
+            "created_at": "2026-07-24T18:12:35.704224",
+            "problem": "tripleside-ai-agent crash",
+            "action": "pm2 restart tripleside-ai-agent",
+            "status": "pending",
+            "approved_by": null,
+            "approved_at": null
+        },
+        {
+            "id": "bf1b108b-94a8-4ada-9925-486f80e18ffc",
+            "created_at": "2026-07-24T18:14:27.919604",
+            "problem": "tripleside-ai-agent previous crash detected",
+            "action": "pm2 restart tripleside-ai-agent",
+            "status": "executed",
+            "approved_by": "admin",
+            "approved_at": "2026-07-24T18:38:07.465146",
+            "execution": {
+                "timestamp": "2026-07-24T18:40:55.090081",
+                "action_id": "pm2 restart tripleside-ai-agent",
+                "status": "blocked",
+                "reason": "Unknown action"
+            },
+            "executed_at": "2026-07-24T18:40:55.090828"
+        },
+        {
+            "id": "06a93fd4-acc5-4795-ba61-50ccd782dc2f",
+            "created_at": "2026-07-24T18:28:04.083090",
+            "problem": "tripleside-ai-agent previous crash detected",
+            "action": "pm2_restart_ai_agent",
+            "status": "pending",
+            "approved_by": null,
+            "approved_at": null
+        },
+        {
+            "id": "5235f92a-e2e8-418b-bf14-da30679b27d7",
+            "created_at": "2026-07-24T18:36:23.754696",
+            "problem": "tripleside-ai-agent crash",
+            "action": "pm2_restart_ai_agent",
+            "status": "pending",
+            "approved_by": null,
+            "approved_at": null
+        }
+    ]
+}

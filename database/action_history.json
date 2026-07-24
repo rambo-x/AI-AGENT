@@ -1,0 +1,77 @@
+{
+    "created_at": "2026-07-24T18:07:30.689025",
+    "actions": [
+        {
+            "timestamp": "2026-07-24T18:07:30.689505",
+            "action": "pm2 restart tripleside-ai-agent",
+            "status": "simulated",
+            "message": "Action approved but execution disabled in safe mode"
+        },
+        {
+            "timestamp": "2026-07-24T18:08:35.311597",
+            "action": "pm2 restart tripleside-ai-agent",
+            "status": "simulated",
+            "message": "Action approved but execution disabled in safe mode"
+        },
+        {
+            "timestamp": "2026-07-24T18:10:45.871475",
+            "action": "Check TELEGRAM_BOT_TOKEN",
+            "status": "simulated",
+            "message": "Action approved but execution disabled in safe mode"
+        },
+        {
+            "timestamp": "2026-07-24T18:16:27.214641",
+            "action": "pm2 restart tripleside-ai-agent",
+            "status": "simulated",
+            "message": "Action approved but execution disabled in safe mode"
+        },
+        {
+            "timestamp": "2026-07-24T18:19:49.603457",
+            "action_id": "pm2_restart_ai_agent",
+            "command": "pm2 restart tripleside-ai-agent",
+            "risk": "medium",
+            "status": "waiting_approval",
+            "message": "Action requires admin approval"
+        },
+        {
+            "timestamp": "2026-07-24T18:19:49.603932",
+            "action_id": "unknown_action",
+            "status": "blocked",
+            "reason": "Unknown action"
+        },
+        {
+            "timestamp": "2026-07-24T18:25:33.643602",
+            "action_id": "pm2_restart_ai_agent",
+            "command": "pm2 restart tripleside-ai-agent",
+            "risk": "medium",
+            "status": "simulated",
+            "message": "Safe mode: execution disabled"
+        },
+        {
+            "timestamp": "2026-07-24T18:25:33.644346",
+            "action_id": "unknown_action",
+            "status": "blocked",
+            "reason": "Unknown action"
+        },
+        {
+            "timestamp": "2026-07-24T18:30:54.936844",
+            "action_id": "pm2 restart tripleside-ai-agent",
+            "status": "blocked",
+            "reason": "Unknown action"
+        },
+        {
+            "timestamp": "2026-07-24T18:31:49.350967",
+            "action_id": "pm2_restart_ai_agent",
+            "command": "pm2 restart tripleside-ai-agent",
+            "risk": "medium",
+            "status": "simulated",
+            "message": "Safe mode: execution disabled"
+        },
+        {
+            "timestamp": "2026-07-24T18:40:55.090081",
+            "action_id": "pm2 restart tripleside-ai-agent",
+            "status": "blocked",
+            "reason": "Unknown action"
+        }
+    ]
+}

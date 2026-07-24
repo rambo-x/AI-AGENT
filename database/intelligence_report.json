@@ -1,0 +1,59 @@
+{
+    "generated_at": "2026-07-24T17:24:05.232568",
+    "system": "TripleSide AI Agent",
+    "summary": {
+        "total_files": 79,
+        "python_modules": 79
+    },
+    "critical_files": [
+        {
+            "file": "/home/triplesidestudio/tripleside-ai-agent/app.py",
+            "reason": "core application component"
+        },
+        {
+            "file": "/home/triplesidestudio/tripleside-ai-agent/scheduler/jobs.py",
+            "reason": "core application component"
+        },
+        {
+            "file": "/home/triplesidestudio/tripleside-ai-agent/scheduler/__init__.py",
+            "reason": "core application component"
+        },
+        {
+            "file": "/home/triplesidestudio/tripleside-ai-agent/ai/core/orchestrator.py",
+            "reason": "core application component"
+        },
+        {
+            "file": "/home/triplesidestudio/tripleside-ai-agent/ai/scheduler/run_scheduler.py",
+            "reason": "core application component"
+        },
+        {
+            "file": "/home/triplesidestudio/tripleside-ai-agent/ai/scheduler/__init__.py",
+            "reason": "core application component"
+        },
+        {
+            "file": "/home/triplesidestudio/tripleside-ai-agent/ai/scheduler/scheduler_engine.py",
+            "reason": "core application component"
+        }
+    ],
+    "api_inventory": [],
+    "environment_used": [
+        "API_URL",
+        "APP_NAME",
+        "BACKEND_PM2",
+        "CHECK_INTERVAL",
+        "FRONTEND_PM2",
+        "TELEGRAM_BOT_TOKEN",
+        "TELEGRAM_CHAT_ID",
+        "WEBSITE_URL"
+    ],
+    "database_usage": [
+        {
+            "file": "/home/triplesidestudio/tripleside-ai-agent/ai/memory/context_ranker.py",
+            "operations": [
+                {
+                    "operation": "re.findall"
+                }
+            ]
+        }
+    ]
+}

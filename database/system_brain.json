@@ -1,0 +1,82 @@
+{
+    "generated_at": "2026-07-24T17:29:28.018400",
+    "system": "TripleSide AI Agent",
+    "architecture": {
+        "entrypoint": [
+            "/home/triplesidestudio/tripleside-ai-agent/app.py"
+        ],
+        "scheduler": [
+            "/home/triplesidestudio/tripleside-ai-agent/scheduler/jobs.py",
+            "/home/triplesidestudio/tripleside-ai-agent/scheduler/__init__.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/scheduler/run_scheduler.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/scheduler/__init__.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/scheduler/scheduler_engine.py"
+        ],
+        "telegram": [
+            "/home/triplesidestudio/tripleside-ai-agent/ai/telegram/response_formatter.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/telegram/bot_engine.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/telegram/intent_router.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/telegram/__init__.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/telegram/diagnostic_service.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/telegram/telegram_runner.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/telegram/chat_router.py"
+        ],
+        "memory": [
+            "/home/triplesidestudio/tripleside-ai-agent/ai/memory/memory_enricher.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/memory/knowledge.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/memory/__init__.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/memory/conversation_memory.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/memory/context_manager.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/memory/context_ranker.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/memory/feedback.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/memory/memory_normalizer.py"
+        ],
+        "analyzers": [
+            "/home/triplesidestudio/tripleside-ai-agent/ai/analyzers/diagnostic_engine.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/analyzers/architecture_analyzer.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/analyzers/log_analyzer.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/analyzers/__init__.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/analyzers/health_analyzer.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/analyzers/dependency_analyzer.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/analyzers/project_analyzer.py"
+        ],
+        "core": [
+            "/home/triplesidestudio/tripleside-ai-agent/ai/core/reasoning.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/core/__init__.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/core/decision_engine.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/core/orchestrator.py"
+        ],
+        "executor": [
+            "/home/triplesidestudio/tripleside-ai-agent/ai/executor/__init__.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/executor/executor_engine.py"
+        ],
+        "knowledge": [
+            "/home/triplesidestudio/tripleside-ai-agent/ai/knowledge/__init__.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/knowledge/knowledge_base.py"
+        ],
+        "storage": [
+            "/home/triplesidestudio/tripleside-ai-agent/ai/storage/storage.py",
+            "/home/triplesidestudio/tripleside-ai-agent/ai/storage/__init__.py"
+        ]
+    },
+    "total_modules": 79,
+    "environment": [
+        "CHECK_INTERVAL",
+        "FRONTEND_PM2",
+        "APP_NAME",
+        "BACKEND_PM2",
+        "TELEGRAM_CHAT_ID",
+        "TELEGRAM_BOT_TOKEN",
+        "API_URL",
+        "WEBSITE_URL"
+    ],
+    "capabilities": [
+        "Telegram AI Interface",
+        "Conversation Memory",
+        "System Diagnostic Engine",
+        "Action Executor",
+        "Knowledge Base",
+        "Background Monitoring"
+    ],
+    "health_score": 100
+}

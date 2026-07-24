@@ -1,0 +1,1685 @@
+{
+    "generated_at": "2026-07-24T17:22:34.215556",
+    "total_files": 79,
+    "files": [
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/app.py",
+            "language": "python",
+            "classes": [],
+            "functions": [
+                "start"
+            ],
+            "async_functions": [],
+            "imports": [
+                "threading"
+            ],
+            "from_imports": [
+                "config",
+                "utils.logger",
+                "scheduler.jobs",
+                "scheduler.jobs",
+                "monitor.loader",
+                "notifications.bot"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/config.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [
+                "os"
+            ],
+            "from_imports": [
+                "dotenv"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": [
+                "CHECK_INTERVAL",
+                "FRONTEND_PM2",
+                "APP_NAME",
+                "BACKEND_PM2",
+                "TELEGRAM_CHAT_ID",
+                "TELEGRAM_BOT_TOKEN",
+                "API_URL",
+                "WEBSITE_URL"
+            ]
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/utils/logger.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [
+                "logging"
+            ],
+            "from_imports": [
+                "pathlib"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/utils/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/state_engine.py",
+            "language": "python",
+            "classes": [
+                "StateEngine"
+            ],
+            "functions": [
+                "__init__",
+                "process"
+            ],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [
+                "copy",
+                "database.state_manager",
+                "database.event_manager"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/notifications/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/database/event_manager.py",
+            "language": "python",
+            "classes": [
+                "EventManager"
+            ],
+            "functions": [
+                "__init__",
+                "load",
+                "save",
+                "register"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/database/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/database/state_manager.py",
+            "language": "python",
+            "classes": [
+                "StateManager"
+            ],
+            "functions": [
+                "__init__",
+                "load",
+                "save",
+                "get",
+                "set",
+                "process"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/scheduler/jobs.py",
+            "language": "python",
+            "classes": [],
+            "functions": [
+                "run_monitor",
+                "register_jobs"
+            ],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [
+                "apscheduler.schedulers.blocking",
+                "database.state_manager"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/scheduler/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/monitor/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/monitor/loader.py",
+            "language": "python",
+            "classes": [],
+            "functions": [
+                "load_monitors"
+            ],
+            "async_functions": [],
+            "imports": [
+                "pkgutil",
+                "importlib"
+            ],
+            "from_imports": [
+                "monitor.base"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/monitor/backend.py",
+            "language": "python",
+            "classes": [
+                "BackendMonitor"
+            ],
+            "functions": [
+                "__init__",
+                "check"
+            ],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [
+                "utils.logger",
+                "monitor.base",
+                "monitor.pm2.backend_monitor"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/monitor/base.py",
+            "language": "python",
+            "classes": [
+                "Monitor"
+            ],
+            "functions": [
+                "check"
+            ],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [
+                "abc"
+            ],
+            "decorators": [
+                "abstractmethod"
+            ],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/events/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/state/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/state/state_manager.py",
+            "language": "python",
+            "classes": [
+                "StateManager"
+            ],
+            "functions": [
+                "__init__",
+                "load",
+                "update",
+                "generate_from_reports",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/tools/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/core/reasoning.py",
+            "language": "python",
+            "classes": [
+                "ReasoningEngine"
+            ],
+            "functions": [
+                "__init__",
+                "load_json",
+                "analyze_decisions",
+                "analyze_architecture",
+                "analyze",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/core/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/core/decision_engine.py",
+            "language": "python",
+            "classes": [
+                "DecisionEngine"
+            ],
+            "functions": [
+                "__init__",
+                "load_json",
+                "save_memory",
+                "analyze_logs",
+                "analyze_health",
+                "analyze",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime",
+                "ai.memory.feedback"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/core/orchestrator.py",
+            "language": "python",
+            "classes": [
+                "AgentOrchestrator"
+            ],
+            "functions": [
+                "__init__",
+                "run_step",
+                "run",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "datetime",
+                "pathlib",
+                "ai.indexer.scanner",
+                "ai.analyzers.project_analyzer",
+                "ai.analyzers.dependency_analyzer",
+                "ai.analyzers.architecture_analyzer",
+                "ai.analyzers.log_analyzer",
+                "ai.analyzers.health_analyzer",
+                "ai.core.decision_engine",
+                "ai.core.reasoning",
+                "ai.recommendation.recommendation_engine",
+                "ai.planner.planner_engine",
+                "ai.executor.executor_engine",
+                "ai.reporters.report_generator",
+                "ai.learning.improvement_engine",
+                "ai.state.state_manager"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/telegram/response_formatter.py",
+            "language": "python",
+            "classes": [
+                "ResponseFormatter"
+            ],
+            "functions": [
+                "format"
+            ],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/telegram/bot_engine.py",
+            "language": "python",
+            "classes": [
+                "TelegramBotEngine"
+            ],
+            "functions": [
+                "__init__",
+                "load_json",
+                "get_status",
+                "get_report",
+                "handle_command"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/telegram/intent_router.py",
+            "language": "python",
+            "classes": [
+                "IntentRouter"
+            ],
+            "functions": [
+                "__init__",
+                "detect"
+            ],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/telegram/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/telegram/diagnostic_service.py",
+            "language": "python",
+            "classes": [
+                "DiagnosticService"
+            ],
+            "functions": [
+                "__init__",
+                "load_json",
+                "add_memory_context",
+                "run"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "ai.analyzers.health_analyzer",
+                "ai.analyzers.log_analyzer",
+                "ai.memory.context_manager",
+                "ai.telegram.response_formatter"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/telegram/telegram_runner.py",
+            "language": "python",
+            "classes": [],
+            "functions": [
+                "main"
+            ],
+            "async_functions": [
+                "status_command",
+                "report_command",
+                "help_command",
+                "text_message_handler"
+            ],
+            "imports": [
+                "os",
+                "sys",
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "dotenv",
+                "telegram",
+                "telegram.ext",
+                "ai.telegram.bot_engine",
+                "ai.telegram.chat_router"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": [
+                "TELEGRAM_BOT_TOKEN"
+            ]
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/telegram/chat_router.py",
+            "language": "python",
+            "classes": [
+                "TelegramChatRouter"
+            ],
+            "functions": [
+                "__init__",
+                "process",
+                "read_status",
+                "read_report"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "ai.telegram.diagnostic_service",
+                "ai.telegram.intent_router",
+                "ai.memory.conversation_memory"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/prompts/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/normalization/rules.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/normalization/matcher.py",
+            "language": "python",
+            "classes": [
+                "RuleMatcher"
+            ],
+            "functions": [
+                "__init__",
+                "match"
+            ],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [
+                "ai.normalization.loader"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/normalization/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/normalization/loader.py",
+            "language": "python",
+            "classes": [
+                "RuleLoader"
+            ],
+            "functions": [
+                "__init__",
+                "ensure_file",
+                "load"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "ai.normalization.rules"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/normalization/manager.py",
+            "language": "python",
+            "classes": [
+                "NormalizationManager"
+            ],
+            "functions": [
+                "__init__",
+                "normalize",
+                "__call__"
+            ],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [
+                "ai.normalization.matcher"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/experience/experience_engine.py",
+            "language": "python",
+            "classes": [
+                "ExperienceEngine"
+            ],
+            "functions": [
+                "__init__",
+                "load",
+                "save_database",
+                "normalize",
+                "record",
+                "history",
+                "statistics",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [
+                "datetime",
+                "ai.storage.storage",
+                "ai.normalization.manager"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/experience/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/models/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/executor/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/executor/executor_engine.py",
+            "language": "python",
+            "classes": [
+                "ExecutorEngine"
+            ],
+            "functions": [
+                "__init__",
+                "load",
+                "save_database",
+                "execute",
+                "history"
+            ],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [
+                "datetime",
+                "ai.storage.storage",
+                "ai.planner.planner_engine"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/analyzers/diagnostic_engine.py",
+            "language": "python",
+            "classes": [
+                "DiagnosticEngine"
+            ],
+            "functions": [
+                "__init__",
+                "load_json",
+                "read_logs",
+                "detect_import_error",
+                "detect_runtime_error",
+                "detect_service_failure",
+                "detect_configuration_issue",
+                "analyze",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/analyzers/architecture_analyzer.py",
+            "language": "python",
+            "classes": [
+                "ArchitectureAnalyzer"
+            ],
+            "functions": [
+                "__init__",
+                "load",
+                "detect_entry_points",
+                "detect_layers",
+                "detect_core_components",
+                "dependency_summary",
+                "analyze",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/analyzers/log_analyzer.py",
+            "language": "python",
+            "classes": [
+                "LogAnalyzer"
+            ],
+            "functions": [
+                "__init__",
+                "sanitize",
+                "detect_error",
+                "analyze",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json",
+                "re"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/analyzers/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/analyzers/health_analyzer.py",
+            "language": "python",
+            "classes": [
+                "HealthAnalyzer"
+            ],
+            "functions": [
+                "__init__",
+                "check_file",
+                "check_structure",
+                "check_python_environment",
+                "analyze",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/analyzers/dependency_analyzer.py",
+            "language": "python",
+            "classes": [
+                "DependencyAnalyzer"
+            ],
+            "functions": [
+                "__init__",
+                "load",
+                "python_modules",
+                "resolve_import",
+                "build_graph",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/analyzers/project_analyzer.py",
+            "language": "python",
+            "classes": [
+                "ProjectAnalyzer"
+            ],
+            "functions": [
+                "__init__",
+                "analyze",
+                "save",
+                "load"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "collections",
+                "datetime",
+                "pathlib",
+                "typing",
+                "ai.indexer.scanner"
+            ],
+            "decorators": [
+                "staticmethod"
+            ],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/learning/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/learning/improvement_engine.py",
+            "language": "python",
+            "classes": [
+                "ImprovementEngine"
+            ],
+            "functions": [
+                "__init__",
+                "load_memory",
+                "analyze_learning",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/recommendation/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/recommendation/recommendation_engine.py",
+            "language": "python",
+            "classes": [
+                "RecommendationEngine"
+            ],
+            "functions": [
+                "__init__",
+                "recommend",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "ai.memory.feedback",
+                "ai.knowledge.knowledge_base",
+                "ai.memory.memory_normalizer"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/scheduler/run_scheduler.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [
+                "os",
+                "sys"
+            ],
+            "from_imports": [
+                "pathlib",
+                "ai.scheduler.scheduler_engine"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/scheduler/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/scheduler/scheduler_engine.py",
+            "language": "python",
+            "classes": [
+                "SchedulerEngine"
+            ],
+            "functions": [
+                "__init__",
+                "run_once",
+                "start",
+                "stop"
+            ],
+            "async_functions": [],
+            "imports": [
+                "time"
+            ],
+            "from_imports": [
+                "datetime",
+                "ai.core.orchestrator"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/memory/memory_enricher.py",
+            "language": "python",
+            "classes": [
+                "MemoryEnricher"
+            ],
+            "functions": [
+                "__init__",
+                "load_decisions",
+                "enrich",
+                "analyze",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime",
+                "ai.memory.memory_normalizer",
+                "ai.memory.feedback"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/memory/knowledge.py",
+            "language": "python",
+            "classes": [
+                "DiagnosticKnowledge"
+            ],
+            "functions": [
+                "__init__",
+                "load",
+                "save_file",
+                "add_case",
+                "search",
+                "all_cases"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/memory/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/memory/conversation_memory.py",
+            "language": "python",
+            "classes": [
+                "ConversationMemory"
+            ],
+            "functions": [
+                "__init__",
+                "load",
+                "save",
+                "remember",
+                "last",
+                "search"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/memory/context_manager.py",
+            "language": "python",
+            "classes": [
+                "ContextManager"
+            ],
+            "functions": [
+                "__init__",
+                "get_context",
+                "summarize"
+            ],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [
+                "ai.memory.conversation_memory",
+                "ai.memory.feedback",
+                "ai.memory.context_ranker"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/memory/context_ranker.py",
+            "language": "python",
+            "classes": [
+                "ContextRanker"
+            ],
+            "functions": [
+                "__init__",
+                "normalize",
+                "score",
+                "rank"
+            ],
+            "async_functions": [],
+            "imports": [
+                "re"
+            ],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [
+                {
+                    "operation": "re.findall"
+                }
+            ],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/memory/feedback.py",
+            "language": "python",
+            "classes": [
+                "MemoryFeedback"
+            ],
+            "functions": [
+                "__init__",
+                "load",
+                "save_database",
+                "normalize",
+                "search",
+                "save_case",
+                "save",
+                "resolve_case",
+                "all_cases",
+                "statistics"
+            ],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [
+                "datetime",
+                "ai.storage.storage",
+                "ai.normalization.manager"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/memory/memory_normalizer.py",
+            "language": "python",
+            "classes": [
+                "MemoryNormalizer"
+            ],
+            "functions": [
+                "__init__",
+                "normalize",
+                "compare"
+            ],
+            "async_functions": [],
+            "imports": [
+                "re"
+            ],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/reporters/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/reporters/report_generator.py",
+            "language": "python",
+            "classes": [
+                "ReportGenerator"
+            ],
+            "functions": [
+                "__init__",
+                "load_json",
+                "generate",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/knowledge/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/knowledge/knowledge_base.py",
+            "language": "python",
+            "classes": [
+                "KnowledgeBase"
+            ],
+            "functions": [
+                "__init__",
+                "load",
+                "search",
+                "all",
+                "add",
+                "remove",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [
+                "ai.storage.storage"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/indexer/parser.py",
+            "language": "python",
+            "classes": [
+                "ProjectParser"
+            ],
+            "functions": [
+                "__init__",
+                "_imports",
+                "_classes",
+                "_functions",
+                "_async_functions",
+                "parse_file",
+                "parse",
+                "save",
+                "load"
+            ],
+            "async_functions": [],
+            "imports": [
+                "ast",
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime",
+                "typing",
+                "ai.indexer.scanner"
+            ],
+            "decorators": [
+                "staticmethod"
+            ],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/indexer/ast_parser.v1.py",
+            "language": "python",
+            "classes": [
+                "ASTParser"
+            ],
+            "functions": [
+                "__init__",
+                "should_ignore",
+                "parse_file",
+                "scan",
+                "save"
+            ],
+            "async_functions": [],
+            "imports": [
+                "ast",
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/indexer/scanner.py",
+            "language": "python",
+            "classes": [
+                "ProjectScanner"
+            ],
+            "functions": [
+                "__init__",
+                "_language",
+                "_component",
+                "scan",
+                "save",
+                "load"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "typing",
+                "datetime"
+            ],
+            "decorators": [
+                "staticmethod"
+            ],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/indexer/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/indexer/ast_parser.py",
+            "language": "python",
+            "classes": [
+                "ProjectAnalyzer"
+            ],
+            "functions": [
+                "__init__",
+                "visit_ClassDef",
+                "visit_FunctionDef",
+                "visit_AsyncFunctionDef",
+                "visit_Import",
+                "visit_ImportFrom",
+                "scan_decorators",
+                "visit_Call",
+                "detect_api",
+                "get_name",
+                "get_string",
+                "scan_file",
+                "build_graph"
+            ],
+            "async_functions": [],
+            "imports": [
+                "ast",
+                "json"
+            ],
+            "from_imports": [
+                "pathlib",
+                "datetime"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/storage/storage.py",
+            "language": "python",
+            "classes": [
+                "Storage"
+            ],
+            "functions": [
+                "__init__",
+                "path",
+                "exists",
+                "load",
+                "save",
+                "delete",
+                "list",
+                "backup"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json",
+                "shutil"
+            ],
+            "from_imports": [
+                "datetime",
+                "pathlib"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/storage/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/planner/__init__.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/planner/planner_rules.py",
+            "language": "python",
+            "classes": [],
+            "functions": [],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/ai/planner/planner_engine.py",
+            "language": "python",
+            "classes": [
+                "PlannerEngine"
+            ],
+            "functions": [
+                "__init__",
+                "plan"
+            ],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [
+                "ai.normalization.manager",
+                "ai.recommendation.recommendation_engine",
+                "ai.experience.experience_engine",
+                "ai.planner.planner_rules"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/monitor/pm2/reader.py",
+            "language": "python",
+            "classes": [
+                "PM2Reader"
+            ],
+            "functions": [
+                "read"
+            ],
+            "async_functions": [],
+            "imports": [
+                "json",
+                "subprocess"
+            ],
+            "from_imports": [],
+            "decorators": [
+                "staticmethod"
+            ],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        },
+        {
+            "path": "/home/triplesidestudio/tripleside-ai-agent/monitor/pm2/backend_monitor.py",
+            "language": "python",
+            "classes": [
+                "BackendMonitor"
+            ],
+            "functions": [
+                "check"
+            ],
+            "async_functions": [],
+            "imports": [],
+            "from_imports": [
+                "monitor.pm2.reader"
+            ],
+            "decorators": [],
+            "api_routes": [],
+            "database_usage": [],
+            "environment": []
+        }
+    ]
+}

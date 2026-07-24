@@ -1,34 +1,74 @@
+# ======================
 # Python
+# ======================
+
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
+
+# ======================
 # Virtual Environment
+# ======================
+
 venv/
 
+
+# ======================
 # Environment
+# ======================
+
 .env
 
+
+# ======================
 # Logs
+# ======================
+
 logs/
 *.log
 
-# Database
-database/*.db
-database/*.sqlite3
 
+# ======================
+# Database Runtime
+# ======================
+
+database/*.json
+
+
+# ======================
+# Keep AI knowledge files
+# ======================
+
+!database/system_brain.json
+!database/runtime_engine.json
+!database/action_history.json
+!database/approval_requests.json
+!database/intelligence_report.json
+!database/project_graph.json
+
+
+# ======================
 # IDE
+# ======================
+
 .vscode/
 .idea/
 
+
+# ======================
 # OS
+# ======================
+
 .DS_Store
 Thumbs.db
 
+# Backups
+database_backup_*/
+database/backup/
 
-database/state.json
-database/events.json
-logs/
-__pycache__/
-*.pyc
+database/event_manager.py
+database/state_manager.py
+
+*.backup

@@ -14,3 +14,8 @@ FRONTEND_PM2 = os.getenv("FRONTEND_PM2", "")
 
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
+
+AI_AGENT_MODE = os.getenv(
+    "AI_AGENT_MODE",
+    "safe"
+)
