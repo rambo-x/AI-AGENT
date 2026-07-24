@@ -1,0 +1,42 @@
+{
+    "generated_at": "2026-07-24T09:43:34.591501",
+    "status": "completed",
+    "issues": [
+        {
+            "level": "error",
+            "category": "runtime_error",
+            "message": "Traceback detected",
+            "possible_causes": [
+                "code exception",
+                "invalid data",
+                "unexpected state"
+            ],
+            "confidence": 0.7
+        },
+        {
+            "level": "warning",
+            "category": "service_failure",
+            "message": "stopped status detected",
+            "possible_causes": [
+                "application crash",
+                "service unavailable"
+            ],
+            "confidence": 0.65
+        },
+        {
+            "level": "warning",
+            "category": "configuration_error",
+            "message": "token reference detected",
+            "possible_causes": [
+                "missing environment variable",
+                "invalid configuration"
+            ],
+            "confidence": 0.6
+        }
+    ],
+    "architecture": "modular_python_application",
+    "dependency_summary": {
+        "nodes": 30,
+        "edges": 35
+    }
+}
