@@ -1,64 +1,95 @@
 """
 Memory Feedback
 
-Long term diagnostic memory storage.
-Stores previous problems and retrieves known solutions.
+Long term diagnostic memory.
+Uses Storage Layer and Normalization Engine.
 """
 
-import json
 from datetime import datetime
-from pathlib import Path
 
-from ai.memory.memory_normalizer import MemoryNormalizer
+from ai.storage.storage import Storage
+from ai.normalization.manager import NormalizationManager
 
 
-MEMORY_FILE = Path(
-    "database/diagnostic_memory.json"
-)
+DEFAULT_MEMORY = {
+    "created_at": datetime.now().isoformat(),
+    "cases": []
+}
 
 
 class MemoryFeedback:
 
-    def __init__(self):
+    def __init__(self, root="."):
 
-        self.normalizer = MemoryNormalizer()
+        self.storage = Storage(root)
 
-        self.ensure_storage()
+        self.normalizer = NormalizationManager(root)
 
-
-    def ensure_storage(self):
-
-        if not MEMORY_FILE.exists():
-
-            MEMORY_FILE.parent.mkdir(
-                exist_ok=True
+        if not self.storage.exists(
+            "diagnostic_memory.json"
+        ):
+            self.storage.save(
+                "diagnostic_memory.json",
+                DEFAULT_MEMORY
             )
-
-            with open(
-                MEMORY_FILE,
-                "w"
-            ) as file:
-
-                json.dump(
-                    {
-                        "created_at":
-                            datetime.now().isoformat(),
-
-                        "cases": []
-                    },
-                    file,
-                    indent=4
-                )
 
 
     def load(self):
 
-        with open(
-            MEMORY_FILE,
-            "r"
-        ) as file:
+        return self.storage.load(
+            "diagnostic_memory.json",
+            DEFAULT_MEMORY
+        )
 
-            return json.load(file)
+
+    def save_database(
+        self,
+        data
+    ):
+
+        self.storage.save(
+            "diagnostic_memory.json",
+            data
+        )
+
+
+    def normalize(
+        self,
+        problem
+    ):
+
+        return self.normalizer.normalize(
+            problem
+        )
+
+
+    def search(
+        self,
+        problem
+    ):
+
+        normalized = self.normalize(
+            problem
+        )
+
+        data = self.load()
+
+        matches = []
+
+        for case in data.get(
+            "cases",
+            []
+        ):
+
+            if case.get(
+                "problem"
+            ) == normalized:
+
+                matches.append(
+                    case
+                )
+
+        return matches
 
 
     def save_case(
@@ -69,12 +100,11 @@ class MemoryFeedback:
         solution=None
     ):
 
-        normalized = self.normalizer.normalize(
+        normalized = self.normalize(
             problem
         )
 
         data = self.load()
-
 
         case = {
 
@@ -95,58 +125,15 @@ class MemoryFeedback:
 
         }
 
-
         data["cases"].append(
             case
         )
 
-
-        with open(
-            MEMORY_FILE,
-            "w"
-        ) as file:
-
-            json.dump(
-                data,
-                file,
-                indent=4
-            )
-
-
-        return case
-
-
-
-    def search(
-        self,
-        problem
-    ):
-
-        normalized = self.normalizer.normalize(
-            problem
+        self.save_database(
+            data
         )
 
-        data = self.load()
-
-        matches = []
-
-
-        for case in data.get(
-            "cases",
-            []
-        ):
-
-            if case.get(
-                "problem"
-            ) == normalized:
-
-                matches.append(
-                    case
-                )
-
-
-        return matches
-
+        return case
 
 
     def save(
@@ -158,7 +145,6 @@ class MemoryFeedback:
             "problem",
             "unknown_problem"
         )
-
 
         category = problem_data.get(
             "category"
@@ -172,17 +158,18 @@ class MemoryFeedback:
             "solution"
         )
 
-
         existing = self.search(
             problem
         )
 
-
         if existing:
 
             return {
+
                 "problem":
-                    self.normalizer.normalize(problem),
+                    self.normalize(
+                        problem
+                    ),
 
                 "previous_cases_found":
                     len(existing),
@@ -194,15 +181,12 @@ class MemoryFeedback:
                     "known_problem"
             }
 
-
-
         case = self.save_case(
             problem,
             category,
             cause,
             solution
         )
-
 
         return {
 
@@ -218,3 +202,46 @@ class MemoryFeedback:
             "memory_status":
                 "new_problem"
         }
+
+
+    def all_cases(self):
+
+        return self.load().get(
+            "cases",
+            []
+        )
+
+
+    def statistics(self):
+
+        cases = self.all_cases()
+
+        return {
+
+            "total_cases":
+                len(cases),
+
+            "known_problems":
+
+                len(
+
+                    set(
+
+                        case["problem"]
+
+                        for case in cases
+
+                    )
+
+                )
+
+        }
+
+
+if __name__ == "__main__":
+
+    memory = MemoryFeedback()
+
+    print(
+        memory.statistics()
+    )

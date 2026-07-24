@@ -1,20 +1,29 @@
 {
     "root": "/home/triplesidestudio/tripleside-ai-agent",
-    "generated_at": "2026-07-24T11:10:52.974158",
-    "total_files": 71,
-    "python_files": 47,
+    "generated_at": "2026-07-24T12:15:19.074971",
+    "total_files": 98,
+    "python_files": 67,
     "folders": [
         "ai",
         "ai/analyzers",
         "ai/core",
+        "ai/executor",
+        "ai/experience",
         "ai/indexer",
+        "ai/knowledge",
         "ai/learning",
         "ai/memory",
         "ai/models",
+        "ai/normalization",
+        "ai/planner",
         "ai/prompts",
+        "ai/recommendation",
         "ai/reporters",
+        "ai/state",
+        "ai/storage",
         "ai/tools",
         "database",
+        "database/backup",
         "events",
         "monitor",
         "monitor/pm2",
@@ -163,8 +172,8 @@
             "depth": 3,
             "language": "python",
             "extension": ".py",
-            "size": 3703,
-            "modified": "2026-07-24T10:58:55.936362"
+            "size": 4905,
+            "modified": "2026-07-24T12:14:55.323807"
         },
         {
             "path": "ai/core/reasoning.py",
@@ -187,6 +196,50 @@
             "extension": ".0",
             "size": 5118,
             "modified": "2026-07-24T09:55:40.788789"
+        },
+        {
+            "path": "ai/executor/__init__.py",
+            "filename": "__init__.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 0,
+            "modified": "2026-07-24T12:13:10.994630"
+        },
+        {
+            "path": "ai/executor/executor_engine.py",
+            "filename": "executor_engine.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 2048,
+            "modified": "2026-07-24T12:13:23.216531"
+        },
+        {
+            "path": "ai/experience/__init__.py",
+            "filename": "__init__.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 0,
+            "modified": "2026-07-24T11:31:54.219393"
+        },
+        {
+            "path": "ai/experience/experience_engine.py",
+            "filename": "experience_engine.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 3388,
+            "modified": "2026-07-24T12:07:49.663195"
         },
         {
             "path": "ai/indexer/__init__.py",
@@ -220,6 +273,28 @@
             "extension": ".py",
             "size": 3113,
             "modified": "2026-07-24T09:08:07.700596"
+        },
+        {
+            "path": "ai/knowledge/__init__.py",
+            "filename": "__init__.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 0,
+            "modified": "2026-07-24T11:22:32.708585"
+        },
+        {
+            "path": "ai/knowledge/knowledge_base.py",
+            "filename": "knowledge_base.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 2883,
+            "modified": "2026-07-24T11:45:55.877814"
         },
         {
             "path": "ai/learning/__init__.py",
@@ -262,8 +337,8 @@
             "depth": 3,
             "language": "python",
             "extension": ".py",
-            "size": 3504,
-            "modified": "2026-07-24T10:48:37.412918"
+            "size": 3923,
+            "modified": "2026-07-24T12:05:49.483824"
         },
         {
             "path": "ai/memory/knowledge.py",
@@ -310,6 +385,94 @@
             "modified": "2026-07-24T08:34:11.234331"
         },
         {
+            "path": "ai/normalization/__init__.py",
+            "filename": "__init__.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 0,
+            "modified": "2026-07-24T11:56:02.158854"
+        },
+        {
+            "path": "ai/normalization/loader.py",
+            "filename": "loader.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 1254,
+            "modified": "2026-07-24T11:57:05.483532"
+        },
+        {
+            "path": "ai/normalization/manager.py",
+            "filename": "manager.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 388,
+            "modified": "2026-07-24T12:02:28.324870"
+        },
+        {
+            "path": "ai/normalization/matcher.py",
+            "filename": "matcher.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 1044,
+            "modified": "2026-07-24T12:01:05.304300"
+        },
+        {
+            "path": "ai/normalization/rules.py",
+            "filename": "rules.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 1040,
+            "modified": "2026-07-24T11:56:16.061784"
+        },
+        {
+            "path": "ai/planner/__init__.py",
+            "filename": "__init__.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 0,
+            "modified": "2026-07-24T12:11:02.368714"
+        },
+        {
+            "path": "ai/planner/planner_engine.py",
+            "filename": "planner_engine.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 1747,
+            "modified": "2026-07-24T12:11:56.100250"
+        },
+        {
+            "path": "ai/planner/planner_rules.py",
+            "filename": "planner_rules.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 1529,
+            "modified": "2026-07-24T12:11:14.941604"
+        },
+        {
             "path": "ai/prompts/__init__.py",
             "filename": "__init__.py",
             "component": "ai",
@@ -319,6 +482,28 @@
             "extension": ".py",
             "size": 0,
             "modified": "2026-07-24T08:34:11.236331"
+        },
+        {
+            "path": "ai/recommendation/__init__.py",
+            "filename": "__init__.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 0,
+            "modified": "2026-07-24T11:26:38.656180"
+        },
+        {
+            "path": "ai/recommendation/recommendation_engine.py",
+            "filename": "recommendation_engine.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 2344,
+            "modified": "2026-07-24T11:26:51.830106"
         },
         {
             "path": "ai/reporters/__init__.py",
@@ -343,6 +528,28 @@
             "modified": "2026-07-24T11:10:34.243828"
         },
         {
+            "path": "ai/state/__init__.py",
+            "filename": "__init__.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 0,
+            "modified": "2026-07-24T11:13:28.621767"
+        },
+        {
+            "path": "ai/state/state_manager.py",
+            "filename": "state_manager.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 2448,
+            "modified": "2026-07-24T11:13:50.985633"
+        },
+        {
             "path": "ai/state_engine.py",
             "filename": "state_engine.py",
             "component": "ai",
@@ -352,6 +559,28 @@
             "extension": ".py",
             "size": 684,
             "modified": "2026-07-24T03:19:59.592695"
+        },
+        {
+            "path": "ai/storage/__init__.py",
+            "filename": "__init__.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 0,
+            "modified": "2026-07-24T11:36:57.752002"
+        },
+        {
+            "path": "ai/storage/storage.py",
+            "filename": "storage.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 2259,
+            "modified": "2026-07-24T11:37:06.803971"
         },
         {
             "path": "ai/tools/__init__.py",
@@ -405,8 +634,19 @@
             "depth": 2,
             "language": "json",
             "extension": ".json",
-            "size": 1845,
-            "modified": "2026-07-24T10:59:13.687263"
+            "size": 2153,
+            "modified": "2026-07-24T11:16:30.027690"
+        },
+        {
+            "path": "database/agent_state.json",
+            "filename": "agent_state.json",
+            "component": "database",
+            "is_root": false,
+            "depth": 2,
+            "language": "json",
+            "extension": ".json",
+            "size": 224,
+            "modified": "2026-07-24T11:16:30.027690"
         },
         {
             "path": "database/architecture.json",
@@ -416,8 +656,19 @@
             "depth": 2,
             "language": "json",
             "extension": ".json",
-            "size": 3230,
-            "modified": "2026-07-24T10:59:13.676263"
+            "size": 3348,
+            "modified": "2026-07-24T11:16:30.013690"
+        },
+        {
+            "path": "database/backup/test_20260724_113755.json",
+            "filename": "test_20260724_113755.json",
+            "component": "database",
+            "is_root": false,
+            "depth": 3,
+            "language": "json",
+            "extension": ".json",
+            "size": 24,
+            "modified": "2026-07-24T11:37:37.523867"
         },
         {
             "path": "database/decision_report.json",
@@ -428,7 +679,7 @@
             "language": "json",
             "extension": ".json",
             "size": 2248,
-            "modified": "2026-07-24T10:59:13.687263"
+            "modified": "2026-07-24T11:16:30.024690"
         },
         {
             "path": "database/dependency_graph.json",
@@ -439,7 +690,7 @@
             "language": "json",
             "extension": ".json",
             "size": 4840,
-            "modified": "2026-07-24T10:59:13.675263"
+            "modified": "2026-07-24T11:16:30.012690"
         },
         {
             "path": "database/diagnostic_memory.json",
@@ -449,8 +700,8 @@
             "depth": 2,
             "language": "json",
             "extension": ".json",
-            "size": 859,
-            "modified": "2026-07-24T10:53:46.382107"
+            "size": 1091,
+            "modified": "2026-07-24T11:49:19.142855"
         },
         {
             "path": "database/diagnostics.json",
@@ -486,6 +737,28 @@
             "modified": "2026-07-24T02:57:30.944158"
         },
         {
+            "path": "database/executions.json",
+            "filename": "executions.json",
+            "component": "database",
+            "is_root": false,
+            "depth": 2,
+            "language": "json",
+            "extension": ".json",
+            "size": 856,
+            "modified": "2026-07-24T12:13:42.040380"
+        },
+        {
+            "path": "database/experience.json",
+            "filename": "experience.json",
+            "component": "database",
+            "is_root": false,
+            "depth": 2,
+            "language": "json",
+            "extension": ".json",
+            "size": 773,
+            "modified": "2026-07-24T12:08:17.294051"
+        },
+        {
             "path": "database/final_report.json",
             "filename": "final_report.json",
             "component": "database",
@@ -494,7 +767,7 @@
             "language": "json",
             "extension": ".json",
             "size": 688,
-            "modified": "2026-07-24T10:31:14.058731"
+            "modified": "2026-07-24T11:16:30.026690"
         },
         {
             "path": "database/health_report.json",
@@ -505,7 +778,18 @@
             "language": "json",
             "extension": ".json",
             "size": 966,
-            "modified": "2026-07-24T10:59:13.685263"
+            "modified": "2026-07-24T11:16:30.023690"
+        },
+        {
+            "path": "database/knowledge.json",
+            "filename": "knowledge.json",
+            "component": "database",
+            "is_root": false,
+            "depth": 2,
+            "language": "json",
+            "extension": ".json",
+            "size": 1030,
+            "modified": "2026-07-24T11:46:32.758644"
         },
         {
             "path": "database/learning_history.json",
@@ -516,7 +800,7 @@
             "language": "json",
             "extension": ".json",
             "size": 855,
-            "modified": "2026-07-24T10:59:13.687263"
+            "modified": "2026-07-24T11:16:30.026690"
         },
         {
             "path": "database/log_analysis.json",
@@ -527,7 +811,7 @@
             "language": "json",
             "extension": ".json",
             "size": 1311,
-            "modified": "2026-07-24T10:59:13.685263"
+            "modified": "2026-07-24T11:16:30.022690"
         },
         {
             "path": "database/memory_enriched_report.json",
@@ -537,8 +821,8 @@
             "depth": 2,
             "language": "json",
             "extension": ".json",
-            "size": 896,
-            "modified": "2026-07-24T10:47:14.603420"
+            "size": 1947,
+            "modified": "2026-07-24T11:16:30.025690"
         },
         {
             "path": "database/memory_feedback.json",
@@ -552,6 +836,17 @@
             "modified": "2026-07-24T10:47:14.602421"
         },
         {
+            "path": "database/normalization_rules.json",
+            "filename": "normalization_rules.json",
+            "component": "database",
+            "is_root": false,
+            "depth": 2,
+            "language": "json",
+            "extension": ".json",
+            "size": 823,
+            "modified": "2026-07-24T12:00:06.156605"
+        },
+        {
             "path": "database/project_analysis.json",
             "filename": "project_analysis.json",
             "component": "database",
@@ -560,7 +855,7 @@
             "language": "json",
             "extension": ".json",
             "size": 1490,
-            "modified": "2026-07-24T10:59:13.674263"
+            "modified": "2026-07-24T11:16:30.010690"
         },
         {
             "path": "database/project_index.json",
@@ -570,8 +865,8 @@
             "depth": 2,
             "language": "json",
             "extension": ".json",
-            "size": 24879,
-            "modified": "2026-07-24T10:59:13.673263"
+            "size": 25924,
+            "modified": "2026-07-24T11:16:30.009690"
         },
         {
             "path": "database/python_index.json",
@@ -592,8 +887,8 @@
             "depth": 2,
             "language": "json",
             "extension": ".json",
-            "size": 1878,
-            "modified": "2026-07-24T10:26:21.578087"
+            "size": 1066,
+            "modified": "2026-07-24T11:16:30.025690"
         },
         {
             "path": "database/state.json",
@@ -604,7 +899,7 @@
             "language": "json",
             "extension": ".json",
             "size": 456,
-            "modified": "2026-07-24T11:09:59.134045"
+            "modified": "2026-07-24T12:14:59.147778"
         },
         {
             "path": "database/state_manager.py",
@@ -616,6 +911,17 @@
             "extension": ".py",
             "size": 971,
             "modified": "2026-07-24T05:52:16.409307"
+        },
+        {
+            "path": "database/test.json",
+            "filename": "test.json",
+            "component": "database",
+            "is_root": false,
+            "depth": 2,
+            "language": "json",
+            "extension": ".json",
+            "size": 24,
+            "modified": "2026-07-24T11:37:37.523867"
         },
         {
             "path": "ecosystem.config.js",

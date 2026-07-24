@@ -1,0 +1,34 @@
+{
+    "knowledge": [
+        {
+            "signature": "telegram_token",
+            "category": "configuration_error",
+            "cause": "Invalid Telegram Bot Token",
+            "solution": "Update TELEGRAM_BOT_TOKEN"
+        },
+        {
+            "signature": "module_not_found",
+            "category": "import_error",
+            "cause": "Missing Python package",
+            "solution": "Install missing package"
+        },
+        {
+            "signature": "connection_refused",
+            "category": "network_error",
+            "cause": "Target service offline",
+            "solution": "Start the service"
+        },
+        {
+            "signature": "permission_denied",
+            "category": "permission_error",
+            "cause": "Insufficient permission",
+            "solution": "Check file permission"
+        },
+        {
+            "signature": "disk_full",
+            "category": "storage_error",
+            "cause": "Disk is full",
+            "solution": "Free disk space"
+        }
+    ]
+}

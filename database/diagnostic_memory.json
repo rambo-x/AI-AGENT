@@ -21,6 +21,13 @@
             "category": "system_health",
             "cause": "No issue detected",
             "solution": "Continue monitoring"
+        },
+        {
+            "timestamp": "2026-07-24T11:49:19.144043",
+            "problem": "disk_full",
+            "category": "storage_error",
+            "cause": "Disk is full",
+            "solution": "Free disk space"
         }
     ]
 }

@@ -1,7 +1,7 @@
 {
-    "generated_at": "2026-07-24T11:10:53.032733",
+    "generated_at": "2026-07-24T12:15:19.109899",
     "status": "completed",
-    "total_learning": 3,
+    "total_learning": 4,
     "knowledge_updates": [
         {
             "problem": "ModuleNotFoundError",
@@ -21,6 +21,13 @@
             "problem": "system structure healthy",
             "category": "system_health",
             "known_solution": "Continue monitoring",
+            "learning_status": "learned",
+            "confidence": 1.0
+        },
+        {
+            "problem": "disk_full",
+            "category": "storage_error",
+            "known_solution": "Free disk space",
             "learning_status": "learned",
             "confidence": 1.0
         }

@@ -3,7 +3,7 @@
         "name": "triplesidestudio-backend",
         "status": "online",
         "restart": 1508,
-        "cpu": 0,
+        "cpu": 0.3,
         "memory": 92925952,
         "uptime": 1784873139243
     },
@@ -12,7 +12,7 @@
             "name": "triplesidestudio-backend",
             "status": "online",
             "restart": 1508,
-            "cpu": 0,
+            "cpu": 0.3,
             "memory": 92925952,
             "uptime": 1784873139243
         }
