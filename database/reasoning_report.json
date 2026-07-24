@@ -1,0 +1,65 @@
+{
+    "generated_at": "2026-07-24T09:56:45.709492",
+    "status": "completed",
+    "diagnoses": [
+        {
+            "problem": "Traceback detected",
+            "category": "runtime_error",
+            "affected_components": [
+                "app.py",
+                "ai/",
+                "database/"
+            ],
+            "evidence": [
+                "Traceback detected",
+                "diagnostic pattern matched"
+            ],
+            "previous_cases": [],
+            "recommendation": [
+                "code exception",
+                "invalid data",
+                "unexpected state"
+            ],
+            "confidence": 0.7
+        },
+        {
+            "problem": "stopped status detected",
+            "category": "service_failure",
+            "affected_components": [
+                "monitor/",
+                "scheduler/",
+                "events/"
+            ],
+            "evidence": [
+                "stopped status detected",
+                "diagnostic pattern matched"
+            ],
+            "previous_cases": [],
+            "recommendation": [
+                "application crash",
+                "service unavailable"
+            ],
+            "confidence": 0.65
+        },
+        {
+            "problem": "token reference detected",
+            "category": "configuration_error",
+            "affected_components": [
+                "config.py",
+                "notifications/",
+                ".env"
+            ],
+            "evidence": [
+                "token reference detected",
+                "diagnostic pattern matched"
+            ],
+            "previous_cases": [],
+            "recommendation": [
+                "missing environment variable",
+                "invalid configuration"
+            ],
+            "confidence": 0.6
+        }
+    ],
+    "architecture": "modular_python_application"
+}

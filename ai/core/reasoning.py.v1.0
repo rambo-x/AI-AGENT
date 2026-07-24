@@ -1,0 +1,274 @@
+"""
+==========================================================
+TripleSide AI Agent
+AI Reasoning Layer v1.0
+==========================================================
+
+Membaca:
+    database/diagnostics.json
+    database/diagnostic_memory.json
+    database/dependency_graph.json
+    database/python_index.json
+
+Menghasilkan:
+    database/reasoning_report.json
+
+Tugas:
+    Menggabungkan bukti dan membuat diagnosis.
+
+Status:
+    Development v1.0
+"""
+
+import json
+from pathlib import Path
+from datetime import datetime
+
+
+class ReasoningEngine:
+
+    def __init__(
+        self,
+        diagnostic_file="database/diagnostics.json",
+        memory_file="database/diagnostic_memory.json",
+        dependency_file="database/dependency_graph.json",
+        python_file="database/python_index.json",
+        output_file="database/reasoning_report.json"
+    ):
+
+        self.diagnostic_file = Path(diagnostic_file)
+        self.memory_file = Path(memory_file)
+        self.dependency_file = Path(dependency_file)
+        self.python_file = Path(python_file)
+        self.output_file = Path(output_file)
+
+        self.diagnostics = self.load(
+            self.diagnostic_file
+        )
+
+        self.memory = self.load(
+            self.memory_file
+        )
+
+        self.dependencies = self.load(
+            self.dependency_file
+        )
+
+        self.python_index = self.load(
+            self.python_file
+        )
+
+
+    # --------------------------------------------------
+
+    def load(self, file):
+
+        if not file.exists():
+
+            return {}
+
+        with file.open(
+            "r",
+            encoding="utf-8"
+        ) as f:
+
+            return json.load(f)
+
+
+    # --------------------------------------------------
+
+    def find_related_files(self, keyword):
+
+        results = []
+
+        keyword = keyword.lower()
+
+
+        for item in self.python_index.get(
+            "files",
+            []
+        ):
+
+            path = item["path"].lower()
+
+            imports = json.dumps(
+                item.get(
+                    "imports",
+                    []
+                )
+            ).lower()
+
+
+            if (
+                keyword in path
+                or keyword in imports
+            ):
+
+                results.append(
+                    item["path"]
+                )
+
+
+        return results
+
+
+    # --------------------------------------------------
+
+    def find_previous_solution(self, keyword):
+
+        matches = []
+
+        for case in self.memory.get(
+            "cases",
+            []
+        ):
+
+            text = json.dumps(
+                case
+            ).lower()
+
+
+            if keyword.lower() in text:
+
+                matches.append(
+                    case
+                )
+
+
+        return matches
+
+
+    # --------------------------------------------------
+
+    def build_reasoning(self):
+
+        issues = self.diagnostics.get(
+            "issues",
+            []
+        )
+
+
+        diagnoses = []
+
+
+        for issue in issues:
+
+            category = issue.get(
+                "category",
+                "unknown"
+            )
+
+
+            message = issue.get(
+                "message",
+                ""
+            )
+
+
+            related = self.find_related_files(
+                category
+            )
+
+
+            history = self.find_previous_solution(
+                category
+            )
+
+
+            confidence = issue.get(
+                "confidence",
+                0
+            )
+
+
+            diagnosis = {
+
+                "problem":
+                    message,
+
+                "category":
+                    category,
+
+                "affected_files":
+                    related,
+
+                "previous_cases":
+                    history,
+
+                "recommendation":
+                    issue.get(
+                        "possible_causes",
+                        []
+                    ),
+
+                "confidence":
+                    confidence
+            }
+
+
+            diagnoses.append(
+                diagnosis
+            )
+
+
+        return {
+
+            "generated_at":
+                datetime.now().isoformat(),
+
+            "status":
+                "completed",
+
+            "diagnoses":
+                diagnoses,
+
+            "architecture":
+                self.diagnostics.get(
+                    "architecture",
+                    "unknown"
+                )
+        }
+
+
+    # --------------------------------------------------
+
+    def save(self):
+
+        result = self.build_reasoning()
+
+
+        self.output_file.parent.mkdir(
+            parents=True,
+            exist_ok=True
+        )
+
+
+        with self.output_file.open(
+            "w",
+            encoding="utf-8"
+        ) as f:
+
+            json.dump(
+                result,
+                f,
+                indent=4
+            )
+
+
+        return str(
+            self.output_file
+        )
+
+
+# ------------------------------------------------------
+
+if __name__ == "__main__":
+
+    engine = ReasoningEngine()
+
+    output = engine.save()
+
+    print(
+        "Reasoning report created:",
+        output
+    )
