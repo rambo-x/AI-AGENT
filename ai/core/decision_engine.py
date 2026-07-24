@@ -1,14 +1,15 @@
 """
 TripleSide AI Agent
-Decision Engine v2
 
-Mengubah hasil analyzer menjadi keputusan:
+Decision Engine v3
+
+Features:
 - membaca log_analysis.json
-- membaca health_report.json
 - membaca system_brain.json
 - menghubungkan masalah dengan modul terkait
 - menyimpan decision_report.json
 - belajar melalui MemoryFeedback
+- membaca Pattern Memory untuk rekomendasi recovery
 """
 
 import json
@@ -16,19 +17,32 @@ from pathlib import Path
 from datetime import datetime
 
 from ai.memory.feedback import MemoryFeedback
+from ai.memory.pattern_memory import PatternMemory
 
 
 class DecisionEngine:
 
-    def __init__(self, root="."):
+
+    def __init__(
+        self,
+        root="."
+    ):
 
         self.root = Path(root)
 
-        self.memory = MemoryFeedback()
+        self.memory = MemoryFeedback(
+            root
+        )
+
+        self.pattern_memory = PatternMemory(
+            root
+        )
+
 
         self.brain = self.load_json(
             "system_brain.json"
         )
+
 
         self.report = {
 
@@ -47,7 +61,11 @@ class DecisionEngine:
         }
 
 
-    def load_json(self, filename):
+
+    def load_json(
+        self,
+        filename
+    ):
 
         path = (
             self.root /
@@ -69,13 +87,16 @@ class DecisionEngine:
                 )
             )
 
+
         except Exception:
 
             return {}
 
 
 
-    def save_report(self):
+    def save_report(
+        self
+    ):
 
         path = (
             self.root /
@@ -112,25 +133,137 @@ class DecisionEngine:
 
             return self.memory.save(
                 {
-                    "problem": problem,
-                    "category": category,
-                    "cause": cause,
-                    "solution": solution
+                    "problem":
+                        problem,
+
+                    "category":
+                        category,
+
+                    "cause":
+                        cause,
+
+                    "solution":
+                        solution
                 }
             )
+
 
         except Exception:
 
             return {
+
                 "memory_status":
                     "failed"
+
             }
 
 
 
-    def find_component(self, keyword):
+
+    def get_memory_recommendation(
+        self,
+        problem
+    ):
+
+        try:
+
+            patterns = (
+                self.pattern_memory.analyze()
+            )
+
+
+            for pattern in patterns:
+
+
+                stored_problem = (
+                    pattern.get(
+                        "pattern",
+                        ""
+                    )
+                )
+
+
+                if (
+
+                    problem.lower()
+                    in stored_problem.lower()
+
+                    or
+
+                    stored_problem.lower()
+                    in problem.lower()
+
+                ):
+
+
+                    return {
+
+                        "found":
+                            True,
+
+
+                        "previous_incidents":
+                            pattern.get(
+                                "occurrences",
+                                0
+                            ),
+
+
+                        "recommended_action":
+                            pattern.get(
+                                "preferred_action"
+                            ),
+
+
+                        "success_rate":
+                            pattern.get(
+                                "success_rate",
+                                0
+                            ),
+
+
+                        "confidence":
+                            pattern.get(
+                                "confidence",
+                                0
+                            )
+
+                    }
+
+
+
+            return {
+
+                "found":
+                    False
+
+            }
+
+
+
+        except Exception as e:
+
+
+            return {
+
+                "found":
+                    False,
+
+                "error":
+                    str(e)
+
+            }
+
+
+
+
+    def find_component(
+        self,
+        keyword
+    ):
 
         result = []
+
 
         architecture = (
             self.brain
@@ -143,7 +276,9 @@ class DecisionEngine:
 
         for name, files in architecture.items():
 
+
             for file in files:
+
 
                 if keyword.lower() in file.lower():
 
@@ -156,7 +291,11 @@ class DecisionEngine:
 
 
 
-    def analyze_logs(self):
+
+    def analyze_logs(
+        self
+    ):
+
 
         data = self.load_json(
             "log_analysis.json"
@@ -172,6 +311,7 @@ class DecisionEngine:
         grouped = {}
 
 
+
         for error in errors:
 
 
@@ -182,6 +322,7 @@ class DecisionEngine:
 
 
             if signature not in grouped:
+
 
                 grouped[signature] = {
 
@@ -195,6 +336,7 @@ class DecisionEngine:
 
 
             grouped[signature]["count"] += 1
+
 
 
 
@@ -216,6 +358,7 @@ class DecisionEngine:
 
 
             decision = {
+
 
                 "problem":
                     problem,
@@ -239,45 +382,27 @@ class DecisionEngine:
 
                 "affected_components":
                     [
+
                         "telegram",
+
                         "configuration"
+
                     ],
 
 
                 "related_modules":
                     self.find_component(
                         "telegram"
-                    ),
-
-
-                "action_plan":
-                    [
-                        "Check TELEGRAM_BOT_TOKEN",
-                        "Validate Telegram token",
-                        "Restart Telegram Agent"
-                    ],
-
-
-                "confidence":
-                    error.get(
-                        "confidence",
-                        0.95
                     )
 
             }
 
 
 
-            decision["memory"] = self.remember(
-
-                problem,
-
-                "configuration_error",
-
-                "Invalid Telegram bot token",
-
-                "Update TELEGRAM_BOT_TOKEN"
-
+            decision["memory"] = (
+                self.get_memory_recommendation(
+                    problem
+                )
             )
 
 
@@ -287,61 +412,12 @@ class DecisionEngine:
 
 
 
-    def analyze_health(self):
-
-        data = self.load_json(
-            "health_report.json"
-        )
-
-
-        status = data.get(
-            "health_status"
-        )
-
-
-        if status == "healthy":
-
-
-            self.report["decisions"].append(
-
-                {
-
-                    "problem":
-                        "System healthy",
-
-
-                    "severity":
-                        "info",
-
-
-                    "category":
-                        "system_health",
-
-
-                    "action_plan":
-                        [
-                            "Continue monitoring"
-                        ],
-
-
-                    "confidence":
-                        1.0
-
-                }
-
-            )
-
-
-
-    def analyze(self):
-
-        self.analyze_logs()
-
-        self.analyze_health()
-
         self.save_report()
 
+
         return self.report
+
+
 
 
 
@@ -351,7 +427,9 @@ if __name__ == "__main__":
     engine = DecisionEngine()
 
 
-    result = engine.analyze()
+    result = (
+        engine.analyze_logs()
+    )
 
 
     print(
