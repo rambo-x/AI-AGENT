@@ -1,0 +1,68 @@
+{
+    "generated_at": "2026-07-24T09:38:13.241149",
+    "architecture_type": "modular_python_application",
+    "entry_points": [
+        "app.py"
+    ],
+    "layers": {
+        "ai": [
+            "ai/analyzers/__init__.py",
+            "ai/analyzers/project_analyzer.py",
+            "ai/core/__init__.py",
+            "ai/indexer/__init__.py",
+            "ai/indexer/scanner.py",
+            "ai/memory/__init__.py",
+            "ai/models/__init__.py",
+            "ai/prompts/__init__.py",
+            "ai/state_engine.py",
+            "ai/tools/__init__.py"
+        ],
+        "monitor": [
+            "monitor/__init__.py",
+            "monitor/backend.py",
+            "monitor/base.py",
+            "monitor/loader.py",
+            "monitor/pm2/backend_monitor.py",
+            "monitor/pm2/reader.py"
+        ],
+        "database": [
+            "database/__init__.py",
+            "database/event_manager.py",
+            "database/events.json",
+            "database/project_analysis.json",
+            "database/project_index.json",
+            "database/state.json",
+            "database/state_manager.py"
+        ],
+        "notifications": [
+            "notifications/__init__.py",
+            "notifications/bot.py",
+            "notifications/notifier.py"
+        ],
+        "scheduler": [
+            "scheduler/__init__.py",
+            "scheduler/jobs.py"
+        ],
+        "events": [
+            "events/__init__.py",
+            "events/dispatcher.py"
+        ],
+        "utils": [
+            "utils/__init__.py",
+            "utils/logger.py"
+        ]
+    },
+    "core_components": [
+        "ai",
+        "monitor",
+        "database",
+        "notifications",
+        "scheduler",
+        "events",
+        "utils"
+    ],
+    "dependency_summary": {
+        "nodes": 30,
+        "edges": 35
+    }
+}
