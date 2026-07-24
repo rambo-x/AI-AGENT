@@ -1,72 +1,220 @@
+"""
+Memory Feedback
+
+Long term diagnostic memory storage.
+Stores previous problems and retrieves known solutions.
+"""
+
 import json
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+
+from ai.memory.memory_normalizer import MemoryNormalizer
+
+
+MEMORY_FILE = Path(
+    "database/diagnostic_memory.json"
+)
 
 
 class MemoryFeedback:
+
     def __init__(self):
-        self.database = Path("database")
-        self.memory_file = self.database / "diagnostic_memory.json"
 
-    def load_memory(self):
-        if not self.memory_file.exists():
-            return []
+        self.normalizer = MemoryNormalizer()
 
-        try:
-            with open(self.memory_file, "r") as file:
-                data = json.load(file)
-                return data.get("cases", [])
-        except Exception:
-            return []
+        self.ensure_storage()
 
-    def search_previous(self, problem):
-        cases = self.load_memory()
 
-        results = []
+    def ensure_storage(self):
 
-        for case in cases:
-            if problem.lower() in case.get("problem", "").lower():
-                results.append(case)
+        if not MEMORY_FILE.exists():
 
-        return results
-
-    def create_feedback(self, diagnosis):
-        problem = diagnosis.get("problem")
-
-        previous = self.search_previous(problem)
-
-        return {
-            "generated_at": datetime.now().isoformat(),
-            "problem": problem,
-            "previous_cases_found": len(previous),
-            "previous_cases": previous,
-            "memory_status": (
-                "known_problem"
-                if previous
-                else "new_problem"
+            MEMORY_FILE.parent.mkdir(
+                exist_ok=True
             )
+
+            with open(
+                MEMORY_FILE,
+                "w"
+            ) as file:
+
+                json.dump(
+                    {
+                        "created_at":
+                            datetime.now().isoformat(),
+
+                        "cases": []
+                    },
+                    file,
+                    indent=4
+                )
+
+
+    def load(self):
+
+        with open(
+            MEMORY_FILE,
+            "r"
+        ) as file:
+
+            return json.load(file)
+
+
+    def save_case(
+        self,
+        problem,
+        category=None,
+        cause=None,
+        solution=None
+    ):
+
+        normalized = self.normalizer.normalize(
+            problem
+        )
+
+        data = self.load()
+
+
+        case = {
+
+            "timestamp":
+                datetime.now().isoformat(),
+
+            "problem":
+                normalized,
+
+            "category":
+                category,
+
+            "cause":
+                cause,
+
+            "solution":
+                solution
+
         }
 
-    def save(self, diagnosis):
-        output = self.create_feedback(diagnosis)
 
-        path = self.database / "memory_feedback.json"
+        data["cases"].append(
+            case
+        )
 
-        with open(path, "w") as file:
+
+        with open(
+            MEMORY_FILE,
+            "w"
+        ) as file:
+
             json.dump(
-                output,
+                data,
                 file,
                 indent=4
             )
 
-        return str(path)
+
+        return case
 
 
-if __name__ == "__main__":
-    feedback = MemoryFeedback()
 
-    test = {
-        "problem": "ModuleNotFoundError"
-    }
+    def search(
+        self,
+        problem
+    ):
 
-    print(feedback.save(test))
+        normalized = self.normalizer.normalize(
+            problem
+        )
+
+        data = self.load()
+
+        matches = []
+
+
+        for case in data.get(
+            "cases",
+            []
+        ):
+
+            if case.get(
+                "problem"
+            ) == normalized:
+
+                matches.append(
+                    case
+                )
+
+
+        return matches
+
+
+
+    def save(
+        self,
+        problem_data
+    ):
+
+        problem = problem_data.get(
+            "problem",
+            "unknown_problem"
+        )
+
+
+        category = problem_data.get(
+            "category"
+        )
+
+        cause = problem_data.get(
+            "cause"
+        )
+
+        solution = problem_data.get(
+            "solution"
+        )
+
+
+        existing = self.search(
+            problem
+        )
+
+
+        if existing:
+
+            return {
+                "problem":
+                    self.normalizer.normalize(problem),
+
+                "previous_cases_found":
+                    len(existing),
+
+                "previous_cases":
+                    existing,
+
+                "memory_status":
+                    "known_problem"
+            }
+
+
+
+        case = self.save_case(
+            problem,
+            category,
+            cause,
+            solution
+        )
+
+
+        return {
+
+            "problem":
+                case["problem"],
+
+            "previous_cases_found":
+                0,
+
+            "previous_cases":
+                [],
+
+            "memory_status":
+                "new_problem"
+        }

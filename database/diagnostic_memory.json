@@ -7,6 +7,20 @@
             "category": "import_error",
             "cause": "telegram package missing",
             "solution": "install python-telegram-bot"
+        },
+        {
+            "timestamp": "2026-07-24T10:49:02.154245",
+            "problem": "telegram_token",
+            "category": "configuration_error",
+            "cause": "Invalid Telegram bot token",
+            "solution": "Update TELEGRAM_BOT_TOKEN"
+        },
+        {
+            "timestamp": "2026-07-24T10:53:46.382943",
+            "problem": "system structure healthy",
+            "category": "system_health",
+            "cause": "No issue detected",
+            "solution": "Continue monitoring"
         }
     ]
 }

@@ -2,11 +2,15 @@ import json
 from pathlib import Path
 from datetime import datetime
 
+from ai.memory.feedback import MemoryFeedback
+
 
 class DecisionEngine:
 
     def __init__(self, root="."):
         self.root = Path(root)
+
+        self.memory = MemoryFeedback()
 
         self.report = {
             "generated_at": datetime.now().isoformat(),
@@ -26,8 +30,35 @@ class DecisionEngine:
             return json.loads(
                 path.read_text()
             )
+
         except Exception:
             return {}
+
+
+    def save_memory(
+        self,
+        problem,
+        category,
+        cause,
+        solution
+    ):
+
+        try:
+
+            return self.memory.save(
+                {
+                    "problem": problem,
+                    "category": category,
+                    "cause": cause,
+                    "solution": solution
+                }
+            )
+
+        except Exception:
+
+            return {
+                "memory_status": "failed"
+            }
 
 
     def analyze_logs(self):
@@ -43,6 +74,7 @@ class DecisionEngine:
 
         grouped = {}
 
+
         for error in errors:
 
             signature = error.get(
@@ -50,60 +82,112 @@ class DecisionEngine:
                 "unknown"
             )
 
+
             if signature not in grouped:
+
                 grouped[signature] = {
                     "count": 0,
                     "error": error
                 }
 
+
             grouped[signature]["count"] += 1
+
 
 
         for signature, item in grouped.items():
 
             error = item["error"]
 
+
             if signature == "telegram_invalid_token":
 
-                self.report["decisions"].append({
+                problem = (
+                    "Telegram authentication failure"
+                )
 
-                    "problem":
-                        "Telegram authentication failure",
+                category = (
+                    "configuration_error"
+                )
 
-                    "category":
-                        "configuration_error",
+                cause = (
+                    "Invalid Telegram bot token"
+                )
 
-                    "root_cause":
-                        "Invalid Telegram bot token",
+                solution = (
+                    "Update TELEGRAM_BOT_TOKEN"
+                )
 
-                    "occurrences":
-                        item["count"],
 
-                    "affected_components":
-                        error.get(
-                            "component",
-                            []
-                        ),
+                memory_result = self.save_memory(
+                    problem,
+                    category,
+                    cause,
+                    solution
+                )
 
-                    "evidence":
-                        [
-                            "telegram_invalid_token detected",
-                            f"{item['count']} similar errors found"
-                        ],
 
-                    "recommendation":
-                        [
-                            "Check TELEGRAM_BOT_TOKEN in .env",
-                            "Update invalid token",
-                            "Restart AI Agent"
-                        ],
+                self.report["decisions"].append(
 
-                    "confidence":
-                        error.get(
-                            "confidence",
-                            0
-                        )
-                })
+                    {
+
+                        "problem":
+                            problem,
+
+
+                        "normalized_problem":
+                            memory_result.get(
+                                "problem"
+                            ),
+
+
+                        "category":
+                            category,
+
+
+                        "root_cause":
+                            cause,
+
+
+                        "occurrences":
+                            item["count"],
+
+
+                        "affected_components":
+                            error.get(
+                                "component",
+                                []
+                            ),
+
+
+                        "evidence":
+                            [
+                                "telegram_invalid_token detected",
+                                f"{item['count']} similar errors found"
+                            ],
+
+
+                        "memory":
+                            memory_result,
+
+
+                        "recommendation":
+                            [
+                                "Check TELEGRAM_BOT_TOKEN in .env",
+                                "Update invalid token",
+                                "Restart AI Agent"
+                            ],
+
+
+                        "confidence":
+                            error.get(
+                                "confidence",
+                                0
+                            )
+                    }
+
+                )
+
 
 
     def analyze_health(self):
@@ -112,52 +196,78 @@ class DecisionEngine:
             "health_report.json"
         )
 
+
         status = data.get(
             "health_status"
         )
 
+
         if status == "healthy":
 
-            self.report["decisions"].append({
+            self.report["decisions"].append(
 
-                "problem":
-                    "System structure healthy",
+                {
 
-                "category":
-                    "system_health",
+                    "problem":
+                        "System structure healthy",
 
-                "recommendation":
-                    [
-                        "No structural issue detected"
-                    ],
 
-                "confidence":
-                    1.0
-            })
+                    "category":
+                        "system_health",
+
+
+                    "memory":
+                        self.save_memory(
+                            "System structure healthy",
+                            "system_health",
+                            "No issue detected",
+                            "Continue monitoring"
+                        ),
+
+
+                    "recommendation":
+                        [
+                            "No structural issue detected"
+                        ],
+
+
+                    "confidence":
+                        1.0
+                }
+
+            )
+
 
 
     def analyze(self):
 
         self.analyze_logs()
+
         self.analyze_health()
 
         return self.report
+
 
 
     def save(self):
 
         result = self.analyze()
 
+
         output = (
             self.root /
             "database/decision_report.json"
         )
 
+
         output.write_text(
+
             json.dumps(
                 result,
                 indent=4
             )
+
         )
+
 
         return str(output)

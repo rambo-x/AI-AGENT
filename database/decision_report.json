@@ -1,9 +1,10 @@
 {
-    "generated_at": "2026-07-24T10:26:21.578093",
+    "generated_at": "2026-07-24T10:53:45.150641",
     "status": "completed",
     "decisions": [
         {
             "problem": "Telegram authentication failure",
+            "normalized_problem": "telegram_token",
             "category": "configuration_error",
             "root_cause": "Invalid Telegram bot token",
             "occurrences": 3,
@@ -16,6 +17,20 @@
                 "telegram_invalid_token detected",
                 "3 similar errors found"
             ],
+            "memory": {
+                "problem": "telegram_token",
+                "previous_cases_found": 1,
+                "previous_cases": [
+                    {
+                        "timestamp": "2026-07-24T10:49:02.154245",
+                        "problem": "telegram_token",
+                        "category": "configuration_error",
+                        "cause": "Invalid Telegram bot token",
+                        "solution": "Update TELEGRAM_BOT_TOKEN"
+                    }
+                ],
+                "memory_status": "known_problem"
+            },
             "recommendation": [
                 "Check TELEGRAM_BOT_TOKEN in .env",
                 "Update invalid token",
@@ -26,6 +41,12 @@
         {
             "problem": "System structure healthy",
             "category": "system_health",
+            "memory": {
+                "problem": "system structure healthy",
+                "previous_cases_found": 0,
+                "previous_cases": [],
+                "memory_status": "new_problem"
+            },
             "recommendation": [
                 "No structural issue detected"
             ],

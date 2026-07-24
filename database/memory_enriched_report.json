@@ -1,0 +1,28 @@
+{
+    "generated_at": "2026-07-24T10:47:14.603683",
+    "status": "completed",
+    "decisions": [
+        {
+            "problem": "Telegram authentication failure",
+            "normalized_problem": "telegram_token",
+            "category": "configuration_error",
+            "confidence": 0.95,
+            "recommendation": [
+                "Check TELEGRAM_BOT_TOKEN in .env",
+                "Update invalid token",
+                "Restart AI Agent"
+            ],
+            "memory": "database/memory_feedback.json"
+        },
+        {
+            "problem": "System structure healthy",
+            "normalized_problem": "system structure healthy",
+            "category": "system_health",
+            "confidence": 1.0,
+            "recommendation": [
+                "No structural issue detected"
+            ],
+            "memory": "database/memory_feedback.json"
+        }
+    ]
+}
