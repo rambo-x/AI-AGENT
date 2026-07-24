@@ -1,0 +1,279 @@
+"""
+Telegram Natural Language Router
+
+Handles free text messages from Telegram
+and routes them to available AI Agent data sources.
+"""
+
+import json
+from pathlib import Path
+from datetime import datetime
+
+
+class TelegramChatRouter:
+
+
+    def __init__(self):
+
+        self.base = Path(".")
+
+
+
+    def process(self, message: str):
+
+        text = message.lower().strip()
+
+
+        # Status request
+        if any(
+            word in text
+            for word in [
+                "status",
+                "kondisi",
+                "keadaan",
+                "aman"
+            ]
+        ):
+
+            return self.read_status()
+
+
+
+        # Report request
+        if any(
+            word in text
+            for word in [
+                "report",
+                "laporan"
+            ]
+        ):
+
+            return self.read_report()
+
+
+
+        # Diagnostic request
+        if any(
+            word in text
+            for word in [
+                "error",
+                "masalah",
+                "bug",
+                "gagal",
+                "fail",
+                "crash",
+                "lambat",
+                "cek",
+                "diagnosa",
+                "diagnostic",
+                "kenapa"
+            ]
+        ):
+
+            return self.run_diagnostic(
+                message
+            )
+
+
+
+        return {
+
+            "status":
+                "understood",
+
+            "message":
+                (
+                    "Saya menerima pesan Anda."
+                    "\n\n"
+                    f"Pertanyaan: {message}"
+                    "\n\n"
+                    "Saya siap membantu melakukan diagnostic sistem."
+                )
+        }
+
+
+
+    def run_diagnostic(
+        self,
+        question
+    ):
+
+
+        state = self.load_json(
+            "database/agent_state.json"
+        )
+
+
+        report = self.load_json(
+            "database/final_report.json"
+        )
+
+
+        issues = state.get(
+            "total_issues",
+            0
+        )
+
+
+        status = state.get(
+            "status",
+            "unknown"
+        )
+
+
+        last_problem = state.get(
+            "last_problem",
+            "-"
+        )
+
+
+        response = {
+
+            "status":
+                "diagnostic_complete",
+
+            "time":
+                datetime.now().isoformat(),
+
+            "question":
+                question,
+
+            "system_status":
+                status,
+
+            "issues_found":
+                issues,
+
+            "last_problem":
+                last_problem,
+
+            "summary":
+                "Pemeriksaan diagnostic selesai."
+
+        }
+
+
+        if report:
+
+            response["report_available"] = True
+
+        else:
+
+            response["report_available"] = False
+
+
+        return response
+
+
+
+    def read_status(self):
+
+
+        paths = [
+
+            "database/agent_state.json",
+            "database/state.json"
+
+        ]
+
+
+        for item in paths:
+
+            path = Path(item)
+
+
+            if path.exists():
+
+                return {
+
+                    "status":
+                        "success",
+
+                    "source":
+                        item,
+
+                    "data":
+                        self.load_json(item)
+
+                }
+
+
+
+        return {
+
+            "status":
+                "unknown",
+
+            "message":
+                "Belum ada state agent."
+
+        }
+
+
+
+    def read_report(self):
+
+
+        path = Path(
+            "database/final_report.json"
+        )
+
+
+        if path.exists():
+
+            return {
+
+                "status":
+                    "success",
+
+                "source":
+                    "report",
+
+                "data":
+                    self.load_json(
+                        path
+                    )
+
+            }
+
+
+
+        return {
+
+            "status":
+                "unknown",
+
+            "message":
+                "Belum ada report."
+
+        }
+
+
+
+    def load_json(
+        self,
+        file
+    ):
+
+
+        path = Path(file)
+
+
+        if not path.exists():
+
+            return {}
+
+
+        try:
+
+            with open(
+                path,
+                "r"
+            ) as f:
+
+                return json.load(f)
+
+
+        except Exception:
+
+            return {}

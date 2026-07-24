@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-07-24T12:15:19.081000",
+    "generated_at": "2026-07-24T14:23:09.386503",
     "architecture_type": "modular_python_application",
     "entry_points": [
         "app.py"
@@ -48,11 +48,18 @@
             "ai/recommendation/recommendation_engine.py",
             "ai/reporters/__init__.py",
             "ai/reporters/report_generator.py",
+            "ai/scheduler/__init__.py",
+            "ai/scheduler/run_scheduler.py",
+            "ai/scheduler/scheduler_engine.py",
             "ai/state/__init__.py",
             "ai/state/state_manager.py",
             "ai/state_engine.py",
             "ai/storage/__init__.py",
             "ai/storage/storage.py",
+            "ai/telegram/__init__.py",
+            "ai/telegram/bot_engine.py",
+            "ai/telegram/chat_router.py",
+            "ai/telegram/telegram_runner.py",
             "ai/tools/__init__.py"
         ],
         "monitor": [

@@ -1,0 +1,261 @@
+"""
+TripleSide AI Agent Telegram Runner
+
+Telegram interface for AI diagnostic assistant.
+"""
+
+
+import os
+import sys
+import json
+
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+
+BASE_DIR = Path(__file__).resolve().parents[2]
+
+sys.path.insert(
+    0,
+    str(BASE_DIR)
+)
+
+os.chdir(BASE_DIR)
+
+
+load_dotenv(
+    BASE_DIR / ".env"
+)
+
+
+from telegram import Update
+
+from telegram.ext import (
+    Application,
+    CommandHandler,
+    MessageHandler,
+    ContextTypes,
+    filters,
+)
+
+
+from ai.telegram.bot_engine import TelegramBotEngine
+
+from ai.telegram.chat_router import TelegramChatRouter
+
+
+
+TOKEN = os.getenv(
+    "TELEGRAM_BOT_TOKEN"
+)
+
+
+
+bot_engine = TelegramBotEngine()
+
+chat_router = TelegramChatRouter()
+
+
+
+
+
+async def status_command(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+):
+
+    result = bot_engine.handle_command(
+        "/status"
+    )
+
+
+    await update.message.reply_text(
+        json.dumps(
+            result,
+            indent=2,
+            ensure_ascii=False
+        )
+    )
+
+
+
+
+
+
+async def report_command(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+):
+
+    result = bot_engine.handle_command(
+        "/report"
+    )
+
+
+    await update.message.reply_text(
+        json.dumps(
+            result,
+            indent=2,
+            ensure_ascii=False
+        )[:4000]
+    )
+
+
+
+
+
+
+async def help_command(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+):
+
+    result = bot_engine.handle_command(
+        "/help"
+    )
+
+
+    await update.message.reply_text(
+        json.dumps(
+            result,
+            indent=2,
+            ensure_ascii=False
+        )
+    )
+
+
+
+
+
+
+async def text_message_handler(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+):
+
+
+    if not update.message:
+
+        return
+
+
+
+    message = update.message.text
+
+
+
+    result = chat_router.process(
+        message
+    )
+
+
+
+    if isinstance(result, dict) and "message" in result:
+
+
+        await update.message.reply_text(
+            result["message"][:4000]
+        )
+
+
+    else:
+
+
+        await update.message.reply_text(
+            json.dumps(
+                result,
+                indent=2,
+                ensure_ascii=False
+            )[:4000]
+        )
+
+
+
+
+
+
+
+
+def main():
+
+
+    if not TOKEN:
+
+        raise Exception(
+            "TELEGRAM_BOT_TOKEN missing"
+        )
+
+
+
+    app = (
+
+        Application
+        .builder()
+        .token(TOKEN)
+        .build()
+
+    )
+
+
+
+    app.add_handler(
+
+        CommandHandler(
+            "status",
+            status_command
+        )
+
+    )
+
+
+
+    app.add_handler(
+
+        CommandHandler(
+            "report",
+            report_command
+        )
+
+    )
+
+
+
+    app.add_handler(
+
+        CommandHandler(
+            "help",
+            help_command
+        )
+
+    )
+
+
+
+    app.add_handler(
+
+        MessageHandler(
+            filters.TEXT & ~filters.COMMAND,
+            text_message_handler
+        )
+
+    )
+
+
+
+    print(
+        "Telegram AI Agent started"
+    )
+
+
+
+    app.run_polling()
+
+
+
+
+
+
+if __name__ == "__main__":
+
+    main()

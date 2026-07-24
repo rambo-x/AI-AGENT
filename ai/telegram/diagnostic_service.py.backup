@@ -1,0 +1,122 @@
+"""
+TripleSide AI Diagnostic Service
+
+Bridge between Telegram chat and AI analyzers.
+"""
+
+from pathlib import Path
+
+
+from ai.analyzers.health_analyzer import HealthAnalyzer
+from ai.analyzers.log_analyzer import LogAnalyzer
+
+
+
+class DiagnosticService:
+
+
+    def __init__(
+        self,
+        root="."
+    ):
+
+        self.root = Path(root)
+
+
+
+    def run(
+        self,
+        question: str
+    ):
+
+
+        try:
+
+
+            health_result = HealthAnalyzer(
+                self.root
+            ).analyze()
+
+
+
+            log_result = LogAnalyzer().analyze()
+
+
+
+            if log_result:
+
+                system_status = "warning"
+
+            else:
+
+                system_status = health_result.get(
+                    "health_status",
+                    "unknown"
+                )
+
+
+
+            return {
+
+                "status":
+                    "diagnostic_complete",
+
+
+                "question":
+                    question,
+
+
+                "system_status":
+                    system_status,
+
+
+                "issues_found":
+                    len(log_result),
+
+
+                "health_check":
+
+                    {
+
+                        "status":
+                            health_result.get(
+                                "health_status",
+                                "unknown"
+                            ),
+
+
+                        "total_checks":
+                            len(
+                                health_result.get(
+                                    "checks",
+                                    []
+                                )
+                            )
+
+                    },
+
+
+                "errors":
+                    log_result[:5]
+
+            }
+
+
+
+        except Exception as error:
+
+
+            return {
+
+                "status":
+                    "diagnostic_failed",
+
+
+                "question":
+                    question,
+
+
+                "error":
+                    str(error)
+
+            }

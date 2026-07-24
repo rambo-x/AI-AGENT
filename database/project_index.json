@@ -1,8 +1,8 @@
 {
     "root": "/home/triplesidestudio/tripleside-ai-agent",
-    "generated_at": "2026-07-24T12:15:19.074971",
-    "total_files": 98,
-    "python_files": 67,
+    "generated_at": "2026-07-24T14:23:09.380509",
+    "total_files": 105,
+    "python_files": 74,
     "folders": [
         "ai",
         "ai/analyzers",
@@ -19,8 +19,10 @@
         "ai/prompts",
         "ai/recommendation",
         "ai/reporters",
+        "ai/scheduler",
         "ai/state",
         "ai/storage",
+        "ai/telegram",
         "ai/tools",
         "database",
         "database/backup",
@@ -41,7 +43,7 @@
             "language": "unknown",
             "extension": "",
             "size": 313,
-            "modified": "2026-07-24T05:09:58.265910"
+            "modified": "2026-07-24T13:55:23.368655"
         },
         {
             "path": ".gitignore",
@@ -528,6 +530,39 @@
             "modified": "2026-07-24T11:10:34.243828"
         },
         {
+            "path": "ai/scheduler/__init__.py",
+            "filename": "__init__.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 0,
+            "modified": "2026-07-24T12:18:01.934433"
+        },
+        {
+            "path": "ai/scheduler/run_scheduler.py",
+            "filename": "run_scheduler.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 365,
+            "modified": "2026-07-24T12:22:56.102441"
+        },
+        {
+            "path": "ai/scheduler/scheduler_engine.py",
+            "filename": "scheduler_engine.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 1178,
+            "modified": "2026-07-24T12:18:16.951327"
+        },
+        {
             "path": "ai/state/__init__.py",
             "filename": "__init__.py",
             "component": "ai",
@@ -583,6 +618,50 @@
             "modified": "2026-07-24T11:37:06.803971"
         },
         {
+            "path": "ai/telegram/__init__.py",
+            "filename": "__init__.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 0,
+            "modified": "2026-07-24T12:27:53.381559"
+        },
+        {
+            "path": "ai/telegram/bot_engine.py",
+            "filename": "bot_engine.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 1779,
+            "modified": "2026-07-24T12:28:07.624471"
+        },
+        {
+            "path": "ai/telegram/chat_router.py",
+            "filename": "chat_router.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 1626,
+            "modified": "2026-07-24T14:09:56.385961"
+        },
+        {
+            "path": "ai/telegram/telegram_runner.py",
+            "filename": "telegram_runner.py",
+            "component": "ai",
+            "is_root": false,
+            "depth": 3,
+            "language": "python",
+            "extension": ".py",
+            "size": 2764,
+            "modified": "2026-07-24T14:12:36.163480"
+        },
+        {
             "path": "ai/tools/__init__.py",
             "filename": "__init__.py",
             "component": "ai",
@@ -634,8 +713,8 @@
             "depth": 2,
             "language": "json",
             "extension": ".json",
-            "size": 2153,
-            "modified": "2026-07-24T11:16:30.027690"
+            "size": 4626,
+            "modified": "2026-07-24T13:23:09.010041"
         },
         {
             "path": "database/agent_state.json",
@@ -646,7 +725,7 @@
             "language": "json",
             "extension": ".json",
             "size": 224,
-            "modified": "2026-07-24T11:16:30.027690"
+            "modified": "2026-07-24T13:23:09.010041"
         },
         {
             "path": "database/architecture.json",
@@ -656,8 +735,8 @@
             "depth": 2,
             "language": "json",
             "extension": ".json",
-            "size": 3348,
-            "modified": "2026-07-24T11:16:30.013690"
+            "size": 4644,
+            "modified": "2026-07-24T13:23:08.910042"
         },
         {
             "path": "database/backup/test_20260724_113755.json",
@@ -679,7 +758,7 @@
             "language": "json",
             "extension": ".json",
             "size": 2248,
-            "modified": "2026-07-24T11:16:30.024690"
+            "modified": "2026-07-24T13:23:08.923042"
         },
         {
             "path": "database/dependency_graph.json",
@@ -690,7 +769,7 @@
             "language": "json",
             "extension": ".json",
             "size": 4840,
-            "modified": "2026-07-24T11:16:30.012690"
+            "modified": "2026-07-24T13:23:08.909042"
         },
         {
             "path": "database/diagnostic_memory.json",
@@ -744,8 +823,8 @@
             "depth": 2,
             "language": "json",
             "extension": ".json",
-            "size": 856,
-            "modified": "2026-07-24T12:13:42.040380"
+            "size": 3976,
+            "modified": "2026-07-24T13:23:08.926042"
         },
         {
             "path": "database/experience.json",
@@ -767,7 +846,7 @@
             "language": "json",
             "extension": ".json",
             "size": 688,
-            "modified": "2026-07-24T11:16:30.026690"
+            "modified": "2026-07-24T13:23:09.009041"
         },
         {
             "path": "database/health_report.json",
@@ -778,7 +857,7 @@
             "language": "json",
             "extension": ".json",
             "size": 966,
-            "modified": "2026-07-24T11:16:30.023690"
+            "modified": "2026-07-24T13:23:08.922042"
         },
         {
             "path": "database/knowledge.json",
@@ -799,8 +878,8 @@
             "depth": 2,
             "language": "json",
             "extension": ".json",
-            "size": 855,
-            "modified": "2026-07-24T11:16:30.026690"
+            "size": 1074,
+            "modified": "2026-07-24T13:23:09.009041"
         },
         {
             "path": "database/log_analysis.json",
@@ -811,7 +890,7 @@
             "language": "json",
             "extension": ".json",
             "size": 1311,
-            "modified": "2026-07-24T11:16:30.022690"
+            "modified": "2026-07-24T13:23:08.921042"
         },
         {
             "path": "database/memory_enriched_report.json",
@@ -855,7 +934,7 @@
             "language": "json",
             "extension": ".json",
             "size": 1490,
-            "modified": "2026-07-24T11:16:30.010690"
+            "modified": "2026-07-24T13:23:08.907042"
         },
         {
             "path": "database/project_index.json",
@@ -865,8 +944,8 @@
             "depth": 2,
             "language": "json",
             "extension": ".json",
-            "size": 25924,
-            "modified": "2026-07-24T11:16:30.009690"
+            "size": 36507,
+            "modified": "2026-07-24T13:23:08.906042"
         },
         {
             "path": "database/python_index.json",
@@ -888,7 +967,7 @@
             "language": "json",
             "extension": ".json",
             "size": 1066,
-            "modified": "2026-07-24T11:16:30.025690"
+            "modified": "2026-07-24T13:23:08.923042"
         },
         {
             "path": "database/state.json",
@@ -899,7 +978,7 @@
             "language": "json",
             "extension": ".json",
             "size": 456,
-            "modified": "2026-07-24T12:14:59.147778"
+            "modified": "2026-07-24T14:22:59.126508"
         },
         {
             "path": "database/state_manager.py",
