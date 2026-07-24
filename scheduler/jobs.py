@@ -16,7 +16,16 @@ def run_monitor(monitor):
     if not data:
         return
 
-    should_alert = engine.process(monitor.name, data)
+    # simpan status terbaru
+    engine.set(
+        monitor.name.lower(),
+        data
+    )
+
+    should_alert = engine.process(
+        monitor.name,
+        data
+    )
 
     if should_alert:
 

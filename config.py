@@ -1,8 +1,4 @@
 import os
-
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
-
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -15,3 +11,6 @@ API_URL = os.getenv("API_URL", "")
 
 BACKEND_PM2 = os.getenv("BACKEND_PM2", "")
 FRONTEND_PM2 = os.getenv("FRONTEND_PM2", "")
+
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")

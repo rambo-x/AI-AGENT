@@ -1,10 +1,20 @@
 {
     "backend": {
         "name": "triplesidestudio-backend",
-        "status": "offline",
-        "restart": 1506,
-        "cpu": 0.3,
-        "memory": 92794880,
-        "uptime": 1784858451159
+        "status": "online",
+        "restart": 1508,
+        "cpu": 0,
+        "memory": 92925952,
+        "uptime": 1784873139243
+    },
+    "Backend": {
+        "last": {
+            "name": "triplesidestudio-backend",
+            "status": "online",
+            "restart": 1508,
+            "cpu": 0,
+            "memory": 92925952,
+            "uptime": 1784873139243
+        }
     }
 }

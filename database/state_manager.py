@@ -33,6 +33,11 @@ class StateManager:
     def process(self, monitor_name, data):
         previous = self.get(monitor_name)
 
+        previous_data = None
+
+        if previous:
+            previous_data = previous.get("last")
+
         self.set(
             monitor_name,
             {
@@ -40,4 +45,4 @@ class StateManager:
             }
         )
 
-        return previous != data
+        return previous_data != data
