@@ -1,0 +1,35 @@
+{
+    "generated_at": "2026-07-24T10:18:44.039194",
+    "status": "completed",
+    "decisions": [
+        {
+            "problem": "Telegram authentication failure",
+            "category": "configuration_error",
+            "root_cause": "Invalid Telegram bot token",
+            "occurrences": 3,
+            "affected_components": [
+                "notifications/bot.py",
+                "config.py",
+                ".env"
+            ],
+            "evidence": [
+                "telegram_invalid_token detected",
+                "3 similar errors found"
+            ],
+            "recommendation": [
+                "Check TELEGRAM_BOT_TOKEN in .env",
+                "Update invalid token",
+                "Restart AI Agent"
+            ],
+            "confidence": 0.95
+        },
+        {
+            "problem": "System structure healthy",
+            "category": "system_health",
+            "recommendation": [
+                "No structural issue detected"
+            ],
+            "confidence": 1.0
+        }
+    ]
+}
