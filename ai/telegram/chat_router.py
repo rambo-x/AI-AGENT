@@ -1,7 +1,7 @@
 """
 Telegram Natural Language Router
 
-Routes free text messages into AI diagnostic services.
+Routes free text messages into AI services.
 """
 
 
@@ -11,6 +11,8 @@ from pathlib import Path
 
 
 from ai.telegram.diagnostic_service import DiagnosticService
+
+from ai.telegram.intent_router import IntentRouter
 
 
 
@@ -29,6 +31,10 @@ class TelegramChatRouter:
         self.diagnostic = DiagnosticService()
 
 
+        self.intent_router = IntentRouter()
+
+
+
 
 
 
@@ -38,44 +44,18 @@ class TelegramChatRouter:
     ):
 
 
-        text = message.lower()
+        intent = self.intent_router.detect(
+            message
+        )
+
+
+        intent_name = intent.get(
+            "intent"
+        )
 
 
 
-        diagnostic_keywords = [
-
-            "error",
-
-            "masalah",
-
-            "problem",
-
-            "gangguan",
-
-            "cek",
-
-            "check",
-
-            "kondisi",
-
-            "status",
-
-            "server",
-
-            "sistem",
-
-            "diagnosa",
-
-            "diagnostic"
-
-        ]
-
-
-
-        if any(
-            keyword in text
-            for keyword in diagnostic_keywords
-        ):
+        if intent_name == "diagnostic":
 
 
             return self.diagnostic.run(
@@ -88,10 +68,36 @@ class TelegramChatRouter:
 
 
 
-        if "report" in text or "laporan" in text:
+        if intent_name == "report":
 
 
             return self.read_report()
+
+
+
+
+
+        if intent_name == "help":
+
+
+            return {
+
+
+                "status":
+                    "success",
+
+
+                "message":
+                    (
+                        "Perintah yang tersedia:\n\n"
+                        "/status\n"
+                        "/report\n"
+                        "/help\n\n"
+                        "Anda juga bisa bertanya bebas "
+                        "tentang kondisi sistem."
+                    )
+
+            }
 
 
 
@@ -108,19 +114,17 @@ class TelegramChatRouter:
 
                 (
 
-                    "Saya menerima pesan Anda."
+                    "🧠 TripleSide AI Agent\n\n"
 
-                    "\n\n"
+                    f"Pertanyaan: {message}\n\n"
 
-                    f"Pertanyaan: {message}"
-
-                    "\n\n"
-
-                    "Saya siap membantu melakukan diagnostic."
+                    "Saya belum menemukan kategori yang tepat, "
+                    "tetapi saya siap membantu diagnostic sistem."
 
                 )
 
         }
+
 
 
 
@@ -167,7 +171,6 @@ class TelegramChatRouter:
 
 
 
-
         return {
 
 
@@ -179,6 +182,7 @@ class TelegramChatRouter:
                 "Belum ada state agent."
 
         }
+
 
 
 
@@ -221,7 +225,6 @@ class TelegramChatRouter:
                     data
 
             }
-
 
 
 
