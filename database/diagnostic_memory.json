@@ -13,7 +13,10 @@
             "problem": "telegram_token",
             "category": "configuration_error",
             "cause": "Invalid Telegram bot token",
-            "solution": "Update TELEGRAM_BOT_TOKEN"
+            "solution": "Update TELEGRAM_BOT_TOKEN",
+            "status": "resolved",
+            "resolved_at": "2026-07-24T15:11:55.759621",
+            "resolution": "Telegram token updated and bot online"
         },
         {
             "timestamp": "2026-07-24T10:53:46.382943",
