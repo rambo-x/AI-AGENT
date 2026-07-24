@@ -2,12 +2,18 @@
 Approval Executor
 
 Execute approved recovery actions.
+
+Version 2:
+- Execute approved actions
+- Save execution result
+- Feed incident memory
 """
 
 from datetime import datetime
 
 from ai.storage.storage import Storage
 from ai.executor.action_engine import ActionEngine
+from ai.memory.incident_memory import IncidentMemory
 
 
 
@@ -22,6 +28,8 @@ class ApprovalExecutor:
         self.storage = Storage(root)
 
         self.action_engine = ActionEngine(root)
+
+        self.memory = IncidentMemory(root)
 
 
 
@@ -52,6 +60,7 @@ class ApprovalExecutor:
         self,
         request_id
     ):
+
 
         data = self.load_requests()
 
@@ -105,6 +114,36 @@ class ApprovalExecutor:
 
 
 
+                #
+                # Save learning memory
+                #
+
+                self.memory.add_incident(
+
+                    problem=request.get(
+                        "problem",
+                        "unknown"
+                    ),
+
+                    decision=request.get(
+                        "action",
+                        "unknown"
+                    ),
+
+                    action=request.get(
+                        "action",
+                        "unknown"
+                    ),
+
+                    result=result.get(
+                        "status",
+                        "unknown"
+                    )
+
+                )
+
+
+
                 return {
 
                     "timestamp":
@@ -140,7 +179,7 @@ if __name__ == "__main__":
 
         executor.execute(
 
-            "bf1b108b-94a8-4ada-9925-486f80e18ffc"
+            "9b4dc7e3-5b36-4d23-9c9b-2576fe1860c3"
 
         )
 
