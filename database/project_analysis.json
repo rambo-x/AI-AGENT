@@ -1,0 +1,67 @@
+{
+    "generated_at": "2026-07-24T09:09:00.854723",
+    "total_components": 8,
+    "components": {
+        "ai": {
+            "files": 10,
+            "python_files": 10,
+            "languages": [
+                "python"
+            ]
+        },
+        "database": {
+            "files": 7,
+            "python_files": 3,
+            "languages": [
+                "json",
+                "python"
+            ]
+        },
+        "events": {
+            "files": 2,
+            "python_files": 2,
+            "languages": [
+                "python"
+            ]
+        },
+        "monitor": {
+            "files": 6,
+            "python_files": 6,
+            "languages": [
+                "python"
+            ]
+        },
+        "notifications": {
+            "files": 3,
+            "python_files": 3,
+            "languages": [
+                "python"
+            ]
+        },
+        "root": {
+            "files": 7,
+            "python_files": 2,
+            "languages": [
+                "javascript",
+                "markdown",
+                "python",
+                "text",
+                "unknown"
+            ]
+        },
+        "scheduler": {
+            "files": 2,
+            "python_files": 2,
+            "languages": [
+                "python"
+            ]
+        },
+        "utils": {
+            "files": 2,
+            "python_files": 2,
+            "languages": [
+                "python"
+            ]
+        }
+    }
+}
