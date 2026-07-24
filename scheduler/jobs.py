@@ -1,12 +1,12 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 from events.dispatcher import EventDispatcher
-from database.state_manager import StateEngine
+from database.state_manager import StateManager
 
 scheduler = BlockingScheduler()
 
 dispatcher = EventDispatcher()
-engine = StateEngine()
+engine = StateManager()
 
 
 def run_monitor(monitor):

@@ -29,3 +29,15 @@ class StateManager:
     def set(self, key, value):
         self.state[key] = value
         self.save()
+
+    def process(self, monitor_name, data):
+        previous = self.get(monitor_name)
+
+        self.set(
+            monitor_name,
+            {
+                "last": data
+            }
+        )
+
+        return previous != data
