@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-07-24T10:26:21.570676",
+    "generated_at": "2026-07-24T11:10:52.979521",
     "architecture_type": "modular_python_application",
     "entry_points": [
         "app.py"
@@ -21,10 +21,17 @@
             "ai/indexer/__init__.py",
             "ai/indexer/parser.py",
             "ai/indexer/scanner.py",
+            "ai/learning/__init__.py",
+            "ai/learning/improvement_engine.py",
             "ai/memory/__init__.py",
+            "ai/memory/feedback.py",
             "ai/memory/knowledge.py",
+            "ai/memory/memory_enricher.py",
+            "ai/memory/memory_normalizer.py",
             "ai/models/__init__.py",
             "ai/prompts/__init__.py",
+            "ai/reporters/__init__.py",
+            "ai/reporters/report_generator.py",
             "ai/state_engine.py",
             "ai/tools/__init__.py"
         ],
@@ -46,8 +53,12 @@
             "database/diagnostics.json",
             "database/event_manager.py",
             "database/events.json",
+            "database/final_report.json",
             "database/health_report.json",
+            "database/learning_history.json",
             "database/log_analysis.json",
+            "database/memory_enriched_report.json",
+            "database/memory_feedback.json",
             "database/project_analysis.json",
             "database/project_index.json",
             "database/python_index.json",

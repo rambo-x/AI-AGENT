@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-07-24T10:26:21.219701",
+    "generated_at": "2026-07-24T11:10:52.600428",
     "status": "completed",
     "pipeline": [
         {
@@ -38,9 +38,24 @@
             "output": "database/decision_report.json"
         },
         {
+            "step": "memory_enricher",
+            "status": "success",
+            "output": "database/memory_enriched_report.json"
+        },
+        {
             "step": "reasoning_engine",
             "status": "success",
             "output": "database/reasoning_report.json"
+        },
+        {
+            "step": "report_generator",
+            "status": "success",
+            "output": "database/final_report.json"
+        },
+        {
+            "step": "improvement_engine",
+            "status": "success",
+            "output": "database/learning_history.json"
         }
     ]
 }

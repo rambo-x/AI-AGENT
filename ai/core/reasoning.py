@@ -1,21 +1,3 @@
-"""
-==========================================================
-TripleSide AI Agent
-AI Reasoning Layer v1.1
-==========================================================
-
-Upgrade:
-- component mapping
-- better historical search
-- evidence generation
-
-Tidak mengubah:
-- Diagnostic Engine
-- Knowledge Layer
-- Dependency Analyzer
-
-"""
-
 import json
 from pathlib import Path
 from datetime import datetime
@@ -23,236 +5,90 @@ from datetime import datetime
 
 class ReasoningEngine:
 
+    def __init__(self, root="."):
 
-    COMPONENT_MAP = {
+        self.root = Path(root)
 
-        "runtime_error": [
-            "app.py",
-            "ai/",
-            "database/"
-        ],
-
-        "service_failure": [
-            "monitor/",
-            "scheduler/",
-            "events/"
-        ],
-
-        "configuration_error": [
-            "config.py",
-            "notifications/",
-            ".env"
-        ],
-
-        "import_error": [
-            "requirements.txt",
-            "ai/",
-            "notifications/"
-        ]
-    }
+        self.report = {
+            "generated_at": datetime.now().isoformat(),
+            "status": "completed",
+            "diagnoses": []
+        }
 
 
+    def load_json(self, filename):
 
-    KEYWORD_MAP = {
-
-        "runtime_error": [
-            "error",
-            "exception",
-            "traceback"
-        ],
-
-        "service_failure": [
-            "stopped",
-            "failed",
-            "service"
-        ],
-
-        "configuration_error": [
-            "token",
-            "config",
-            "environment"
-        ]
-    }
-
-
-
-    def __init__(self):
-
-        self.diagnostics = self.load(
-            "database/diagnostics.json"
+        path = (
+            self.root /
+            "database" /
+            filename
         )
 
-        self.memory = self.load(
-            "database/diagnostic_memory.json"
-        )
+        if not path.exists():
 
-        self.output = Path(
-            "database/reasoning_report.json"
-        )
+            return {}
 
+        try:
 
-    # ------------------------------------------------
+            return json.loads(
+                path.read_text()
+            )
 
-
-    def load(self, filename):
-
-        file = Path(filename)
-
-
-        if not file.exists():
+        except Exception:
 
             return {}
 
 
-        with file.open(
-            "r",
-            encoding="utf-8"
-        ) as f:
 
-            return json.load(f)
+    def analyze_decisions(self):
 
-
-
-    # ------------------------------------------------
-
-
-    def find_previous_cases(
-        self,
-        issue
-    ):
-
-        results = []
-
-
-        keywords = []
-
-        keywords.append(
-            issue.get(
-                "category",
-                ""
-            )
+        data = self.load_json(
+            "decision_report.json"
         )
 
 
-        keywords.append(
-            issue.get(
-                "message",
-                ""
-            )
-        )
-
-
-        keywords.extend(
-            issue.get(
-                "possible_causes",
-                []
-            )
-        )
-
-
-        for case in self.memory.get(
-            "cases",
-            []
-        ):
-
-            text = json.dumps(
-                case
-            ).lower()
-
-
-            for key in keywords:
-
-                if key.lower() in text:
-
-                    results.append(case)
-
-                    break
-
-
-        return results
-
-
-
-    # ------------------------------------------------
-
-
-    def find_components(
-        self,
-        category
-    ):
-
-        return self.COMPONENT_MAP.get(
-            category,
+        decisions = data.get(
+            "decisions",
             []
         )
 
 
+        for item in decisions:
 
-    # ------------------------------------------------
-
-
-    def build(self):
-
-        reports = []
-
-
-        for issue in self.diagnostics.get(
-            "issues",
-            []
-        ):
-
-
-            category = issue.get(
-                "category",
-                "unknown"
-            )
-
-
-            report = {
-
+            diagnosis = {
 
                 "problem":
-                    issue.get(
-                        "message"
+                    item.get(
+                        "problem",
+                        "unknown"
                     ),
-
 
                 "category":
-                    category,
-
+                    item.get(
+                        "category",
+                        "unknown"
+                    ),
 
                 "affected_components":
-                    self.find_components(
-                        category
-                    ),
-
-
-                "evidence": [
-
-                    issue.get(
-                        "message"
-                    ),
-
-                    "diagnostic pattern matched"
-
-                ],
-
-
-                "previous_cases":
-                    self.find_previous_cases(
-                        issue
-                    ),
-
-
-                "recommendation":
-                    issue.get(
-                        "possible_causes",
+                    item.get(
+                        "affected_components",
                         []
                     ),
 
+                "evidence":
+                    item.get(
+                        "evidence",
+                        []
+                    ),
+
+                "recommendation":
+                    item.get(
+                        "recommendation",
+                        []
+                    ),
 
                 "confidence":
-                    issue.get(
+                    item.get(
                         "confidence",
                         0
                     )
@@ -260,57 +96,60 @@ class ReasoningEngine:
             }
 
 
-            reports.append(
-                report
+            self.report["diagnoses"].append(
+                diagnosis
             )
 
 
-        return {
 
-            "generated_at":
-                datetime.now().isoformat(),
+    def analyze_architecture(self):
 
-
-            "status":
-                "completed",
+        data = self.load_json(
+            "architecture.json"
+        )
 
 
-            "diagnoses":
-                reports,
-
-
-            "architecture":
-                self.diagnostics.get(
-                    "architecture"
-                )
-
-        }
+        self.report["architecture"] = (
+            data.get(
+                "architecture_type",
+                "unknown"
+            )
+        )
 
 
 
-    # ------------------------------------------------
+    def analyze(self):
+
+        self.analyze_decisions()
+
+        self.analyze_architecture()
+
+        return self.report
+
 
 
     def save(self):
 
-        result = self.build()
+        result = self.analyze()
 
 
-        with self.output.open(
-            "w",
-            encoding="utf-8"
-        ) as f:
+        output = (
+            self.root /
+            "database/reasoning_report.json"
+        )
 
-            json.dump(
+
+        output.write_text(
+
+            json.dumps(
                 result,
-                f,
                 indent=4
             )
 
-
-        return str(
-            self.output
         )
+
+
+        return str(output)
 
 
 

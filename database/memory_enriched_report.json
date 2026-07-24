@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-07-24T10:47:14.603683",
+    "generated_at": "2026-07-24T11:10:52.990834",
     "status": "completed",
     "decisions": [
         {
@@ -12,7 +12,20 @@
                 "Update invalid token",
                 "Restart AI Agent"
             ],
-            "memory": "database/memory_feedback.json"
+            "memory": {
+                "problem": "telegram_token",
+                "previous_cases_found": 1,
+                "previous_cases": [
+                    {
+                        "timestamp": "2026-07-24T10:49:02.154245",
+                        "problem": "telegram_token",
+                        "category": "configuration_error",
+                        "cause": "Invalid Telegram bot token",
+                        "solution": "Update TELEGRAM_BOT_TOKEN"
+                    }
+                ],
+                "memory_status": "known_problem"
+            }
         },
         {
             "problem": "System structure healthy",
@@ -22,7 +35,20 @@
             "recommendation": [
                 "No structural issue detected"
             ],
-            "memory": "database/memory_feedback.json"
+            "memory": {
+                "problem": "system structure healthy",
+                "previous_cases_found": 1,
+                "previous_cases": [
+                    {
+                        "timestamp": "2026-07-24T10:53:46.382943",
+                        "problem": "system structure healthy",
+                        "category": "system_health",
+                        "cause": "No issue detected",
+                        "solution": "Continue monitoring"
+                    }
+                ],
+                "memory_status": "known_problem"
+            }
         }
     ]
 }

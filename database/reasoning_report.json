@@ -1,64 +1,35 @@
 {
-    "generated_at": "2026-07-24T10:26:21.579087",
+    "generated_at": "2026-07-24T11:10:52.991194",
     "status": "completed",
     "diagnoses": [
         {
-            "problem": "Traceback detected",
-            "category": "runtime_error",
-            "affected_components": [
-                "app.py",
-                "ai/",
-                "database/"
-            ],
-            "evidence": [
-                "Traceback detected",
-                "diagnostic pattern matched"
-            ],
-            "previous_cases": [],
-            "recommendation": [
-                "code exception",
-                "invalid data",
-                "unexpected state"
-            ],
-            "confidence": 0.7
-        },
-        {
-            "problem": "stopped status detected",
-            "category": "service_failure",
-            "affected_components": [
-                "monitor/",
-                "scheduler/",
-                "events/"
-            ],
-            "evidence": [
-                "stopped status detected",
-                "diagnostic pattern matched"
-            ],
-            "previous_cases": [],
-            "recommendation": [
-                "application crash",
-                "service unavailable"
-            ],
-            "confidence": 0.65
-        },
-        {
-            "problem": "token reference detected",
+            "problem": "Telegram authentication failure",
             "category": "configuration_error",
             "affected_components": [
+                "notifications/bot.py",
                 "config.py",
-                "notifications/",
                 ".env"
             ],
             "evidence": [
-                "token reference detected",
-                "diagnostic pattern matched"
+                "telegram_invalid_token detected",
+                "3 similar errors found"
             ],
-            "previous_cases": [],
             "recommendation": [
-                "missing environment variable",
-                "invalid configuration"
+                "Check TELEGRAM_BOT_TOKEN in .env",
+                "Update invalid token",
+                "Restart AI Agent"
             ],
-            "confidence": 0.6
+            "confidence": 0.95
+        },
+        {
+            "problem": "System structure healthy",
+            "category": "system_health",
+            "affected_components": [],
+            "evidence": [],
+            "recommendation": [
+                "No structural issue detected"
+            ],
+            "confidence": 1.0
         }
     ],
     "architecture": "modular_python_application"

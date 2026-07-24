@@ -8,8 +8,15 @@ from ai.analyzers.dependency_analyzer import DependencyAnalyzer
 from ai.analyzers.architecture_analyzer import ArchitectureAnalyzer
 from ai.analyzers.log_analyzer import LogAnalyzer
 from ai.analyzers.health_analyzer import HealthAnalyzer
+
 from ai.core.decision_engine import DecisionEngine
 from ai.core.reasoning import ReasoningEngine
+
+from ai.memory.memory_enricher import MemoryEnricher
+
+from ai.reporters.report_generator import ReportGenerator
+
+from ai.learning.improvement_engine import ImprovementEngine
 
 
 class AgentOrchestrator:
@@ -31,30 +38,37 @@ class AgentOrchestrator:
 
             result = function()
 
-            self.report["pipeline"].append({
-                "step": name,
-                "status": "success",
-                "output": result
-            })
+            self.report["pipeline"].append(
+                {
+                    "step": name,
+                    "status": "success",
+                    "output": result
+                }
+            )
 
             return result
 
+
         except Exception as e:
 
-            self.report["pipeline"].append({
-                "step": name,
-                "status": "failed",
-                "error": str(e)
-            })
+            self.report["pipeline"].append(
+                {
+                    "step": name,
+                    "status": "failed",
+                    "error": str(e)
+                }
+            )
 
             return None
+
 
 
     def run(self):
 
         self.run_step(
             "project_scanner",
-            lambda: ProjectScanner(
+            lambda:
+            ProjectScanner(
                 self.root
             ).save()
         )
@@ -62,35 +76,40 @@ class AgentOrchestrator:
 
         self.run_step(
             "project_analyzer",
-            lambda: ProjectAnalyzer(
+            lambda:
+            ProjectAnalyzer(
             ).save()
         )
 
 
         self.run_step(
             "dependency_analyzer",
-            lambda: DependencyAnalyzer(
+            lambda:
+            DependencyAnalyzer(
             ).save()
         )
 
 
         self.run_step(
             "architecture_analyzer",
-            lambda: ArchitectureAnalyzer(
+            lambda:
+            ArchitectureAnalyzer(
             ).save()
         )
 
 
         self.run_step(
             "log_analyzer",
-            lambda: LogAnalyzer(
+            lambda:
+            LogAnalyzer(
             ).save()
         )
 
 
         self.run_step(
             "health_analyzer",
-            lambda: HealthAnalyzer(
+            lambda:
+            HealthAnalyzer(
                 self.root
             ).save()
         )
@@ -98,7 +117,17 @@ class AgentOrchestrator:
 
         self.run_step(
             "decision_engine",
-            lambda: DecisionEngine(
+            lambda:
+            DecisionEngine(
+                self.root
+            ).save()
+        )
+
+
+        self.run_step(
+            "memory_enricher",
+            lambda:
+            MemoryEnricher(
                 self.root
             ).save()
         )
@@ -106,7 +135,27 @@ class AgentOrchestrator:
 
         self.run_step(
             "reasoning_engine",
-            lambda: ReasoningEngine(
+            lambda:
+            ReasoningEngine(
+                self.root
+            ).save()
+        )
+
+
+        self.run_step(
+            "report_generator",
+            lambda:
+            ReportGenerator(
+                self.root
+            ).save()
+        )
+
+
+        self.run_step(
+            "improvement_engine",
+            lambda:
+            ImprovementEngine(
+                self.root
             ).save()
         )
 
@@ -121,10 +170,12 @@ class AgentOrchestrator:
 
         data = self.run()
 
+
         output = (
             self.root /
             "database/agent_report.json"
         )
+
 
         output.write_text(
             json.dumps(
@@ -132,6 +183,7 @@ class AgentOrchestrator:
                 indent=4
             )
         )
+
 
         return str(output)
 
