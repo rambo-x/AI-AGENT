@@ -9,7 +9,6 @@ Supports:
 - status
 - help
 - fallback conversation
-- conversation memory
 """
 
 
@@ -21,8 +20,6 @@ from pathlib import Path
 from ai.telegram.diagnostic_service import DiagnosticService
 
 from ai.telegram.intent_router import IntentRouter
-
-from ai.memory.conversation_memory import ConversationMemory
 
 
 
@@ -42,10 +39,6 @@ class TelegramChatRouter:
 
 
         self.intent_router = IntentRouter()
-
-
-        self.memory = ConversationMemory()
-
 
 
 
@@ -69,16 +62,14 @@ class TelegramChatRouter:
 
 
 
-        response = None
-
-
-
-
+        # -----------------------------
+        # Diagnostic request
+        # -----------------------------
 
         if intent_name == "diagnostic":
 
 
-            response = self.diagnostic.run(
+            return self.diagnostic.run(
                 message
             )
 
@@ -86,10 +77,14 @@ class TelegramChatRouter:
 
 
 
-        elif intent_name == "status":
+        # -----------------------------
+        # Status request
+        # -----------------------------
+
+        if intent_name == "status":
 
 
-            response = self.diagnostic.run(
+            return self.diagnostic.run(
                 message
             )
 
@@ -97,19 +92,27 @@ class TelegramChatRouter:
 
 
 
-        elif intent_name == "report":
+        # -----------------------------
+        # Report request
+        # -----------------------------
+
+        if intent_name == "report":
 
 
-            response = self.read_report()
+            return self.read_report()
 
 
 
 
 
-        elif intent_name == "help":
+        # -----------------------------
+        # Help request
+        # -----------------------------
+
+        if intent_name == "help":
 
 
-            response = {
+            return {
 
 
                 "status":
@@ -139,53 +142,33 @@ class TelegramChatRouter:
 
 
 
-        else:
+
+        # -----------------------------
+        # Unknown conversation
+        # -----------------------------
+
+        return {
 
 
-            response = {
-
-
-                "status":
-                    "understood",
-
-
-
-                "message":
-
-                    (
-
-                        "🧠 TripleSide AI Agent\n\n"
-
-                        f"Pertanyaan: {message}\n\n"
-
-                        "Saya belum menemukan kategori yang tepat, "
-                        "tetapi saya siap membantu diagnostic sistem."
-
-                    )
-
-            }
+            "status":
+                "understood",
 
 
 
+            "message":
 
+                (
 
+                    "🧠 TripleSide AI Agent\n\n"
 
-        # Save short term conversation memory
+                    f"Pertanyaan: {message}\n\n"
 
-        self.memory.remember(
+                    "Saya belum menemukan kategori yang tepat, "
+                    "tetapi saya siap membantu diagnostic sistem."
 
-            message,
+                )
 
-            intent_name,
-
-            str(response)
-
-        )
-
-
-
-        return response
-
+        }
 
 
 
@@ -198,6 +181,7 @@ class TelegramChatRouter:
         path = Path(
             "database/state.json"
         )
+
 
 
         if path.exists():
@@ -240,7 +224,6 @@ class TelegramChatRouter:
                 "Belum ada state agent."
 
         }
-
 
 
 
