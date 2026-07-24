@@ -3,11 +3,11 @@ TripleSide AI Diagnostic Service
 
 Bridge between Telegram chat and AI Agent reports.
 
-Includes:
-- health analysis
-- log analysis
-- diagnostic memory
-- conversation context
+Integrates:
+- Health Analyzer
+- Log Analyzer
+- Context Memory
+- Response Formatter
 """
 
 
@@ -17,13 +17,16 @@ from pathlib import Path
 
 
 from ai.analyzers.health_analyzer import HealthAnalyzer
+
 from ai.analyzers.log_analyzer import LogAnalyzer
+
+
+from ai.memory.context_manager import ContextManager
 
 
 from ai.telegram.response_formatter import ResponseFormatter
 
 
-from ai.memory.context_manager import ContextManager
 
 
 
@@ -48,6 +51,8 @@ class DiagnosticService:
         self.context = ContextManager(
             root
         )
+
+
 
 
 
@@ -89,6 +94,74 @@ class DiagnosticService:
 
 
 
+
+    def add_memory_context(
+        self,
+        message,
+        response
+    ):
+
+
+        context = self.context.get_context(
+
+            message
+
+        )
+
+
+
+        summary = self.context.summarize(
+
+            context
+
+        )
+
+
+
+        if summary:
+
+
+            response += (
+
+
+                "\n\n"
+
+                "🧠 Context Memory:\n"
+
+            )
+
+
+
+            for item in summary:
+
+
+                response += (
+
+                    "• "
+
+                    +
+
+                    item
+
+                    +
+
+                    "\n"
+
+                )
+
+
+
+        return response
+
+
+
+
+
+
+
+
+
+
     def run(
         self,
         question: str
@@ -98,28 +171,10 @@ class DiagnosticService:
         try:
 
 
-            # -------------------------
-            # Build context
-            # -------------------------
 
-            context = self.context.get_context(
-                question
-            )
-
-
-
-            context_summary = self.context.summarize(
-                context
-            )
-
-
-
-
-
-
-            # -------------------------
+            # -----------------------------
             # Realtime checks
-            # -------------------------
+            # -----------------------------
 
             health_result = HealthAnalyzer(
 
@@ -137,13 +192,15 @@ class DiagnosticService:
 
 
 
-            # -------------------------
-            # Load AI reports
-            # -------------------------
+
+            # -----------------------------
+            # Load reasoning reports
+            # -----------------------------
 
             reasoning = self.load_json(
 
                 self.root /
+
                 "database/reasoning_report.json"
 
             )
@@ -153,6 +210,7 @@ class DiagnosticService:
             decision = self.load_json(
 
                 self.root /
+
                 "database/decision_report.json"
 
             )
@@ -163,11 +221,10 @@ class DiagnosticService:
 
 
 
-            # -------------------------
-            # Format response
-            # -------------------------
+
 
             if reasoning and decision:
+
 
 
                 message = self.formatter.format(
@@ -179,8 +236,8 @@ class DiagnosticService:
                 )
 
 
-
             else:
+
 
 
                 message = (
@@ -190,9 +247,11 @@ class DiagnosticService:
                     f"Pertanyaan: {question}\n\n"
 
                     f"Status sistem: "
+
                     f"{health_result.get('health_status','unknown')}\n"
 
                     f"Error ditemukan: "
+
                     f"{len(log_result)}"
 
                 )
@@ -202,25 +261,18 @@ class DiagnosticService:
 
 
 
-            # -------------------------
-            # Add context information
-            # -------------------------
 
-            if context_summary:
+            # -----------------------------
+            # Add memory context
+            # -----------------------------
 
+            message = self.add_memory_context(
 
-                message += "\n\n🧠 Context Memory:\n"
+                question,
 
+                message
 
-                for item in context_summary:
-
-
-                    message += (
-
-                        f"• {item}\n"
-
-                    )
-
+            )
 
 
 
@@ -251,27 +303,33 @@ class DiagnosticService:
 
                 "raw":
 
-                    {
-
-                        "health":
-
-                            health_result,
+                {
 
 
+                    "health":
 
-                        "errors":
-
-                            log_result[:5],
+                        health_result,
 
 
 
-                        "context":
+                    "errors":
 
-                            context
+                        log_result[:5],
 
-                    }
+
+
+                    "context":
+
+                        self.context.get_context(
+
+                            question
+
+                        )
+
+                }
 
             }
+
 
 
 

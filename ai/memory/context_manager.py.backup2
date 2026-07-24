@@ -1,13 +1,14 @@
 """
 TripleSide AI Agent
 
-Context Manager v2.1
+Context Manager v2.0
 
 Combines:
 - conversation memory
 - diagnostic memory
 - context ranking
-- top relevant memory selection
+
+Provides relevant context only.
 """
 
 
@@ -49,14 +50,15 @@ class ContextManager:
 
 
 
+
     def get_context(
         self,
-        message,
-        limit=3
+        message
     ):
 
 
         context = {
+
 
             "current_message":
                 message,
@@ -76,14 +78,16 @@ class ContextManager:
 
 
 
+
         # ---------------------------------
-        # Latest conversation
+        # Get latest conversation
         # ---------------------------------
 
         last = self.conversation.last()
 
 
         if last:
+
 
             context["last_conversation"] = last
 
@@ -94,10 +98,13 @@ class ContextManager:
 
 
         # ---------------------------------
-        # Rank diagnostic memory
+        # Search diagnostic memory
         # ---------------------------------
 
-        memories = self.diagnostic_memory.all_cases()
+        cases = self.diagnostic_memory.all_cases()
+
+
+
 
 
 
@@ -105,9 +112,7 @@ class ContextManager:
 
             message,
 
-            memories,
-
-            limit=limit
+            cases
 
         )
 
@@ -116,9 +121,8 @@ class ContextManager:
 
 
 
-
         # ---------------------------------
-        # Only relevant memory
+        # Only keep relevant memories
         # ---------------------------------
 
         relevant = []
@@ -128,15 +132,10 @@ class ContextManager:
         for item in ranked:
 
 
-
-            score = item.get(
+            if item.get(
                 "score",
                 0
-            )
-
-
-
-            if score >= 0.2:
+            ) >= 0.2:
 
 
                 memory = item.get(
@@ -144,23 +143,10 @@ class ContextManager:
                 )
 
 
-
                 if memory:
 
-
                     relevant.append(
-
-                        {
-
-                            "score":
-                                score,
-
-
-                            "memory":
-                                memory
-
-                        }
-
+                        memory
                     )
 
 
@@ -191,8 +177,6 @@ class ContextManager:
 
 
         summary = []
-
-
 
 
 
@@ -236,41 +220,25 @@ class ContextManager:
 
             summary.append(
 
-                f"Ditemukan {len(cases)} memory relevan."
+                f"Ditemukan {len(cases)} kasus memory relevan."
 
             )
 
 
 
-            for item in cases:
+            for case in cases:
 
 
-
-                memory = item.get(
-                    "memory",
-                    {}
-                )
-
-
-                score = item.get(
-                    "score",
-                    0
-                )
-
-
-
-                problem = memory.get(
+                problem = case.get(
                     "problem",
                     "-"
                 )
 
 
-
-                status = memory.get(
+                status = case.get(
                     "status",
                     ""
                 )
-
 
 
                 if status:
@@ -278,20 +246,16 @@ class ContextManager:
 
                     summary.append(
 
-                        f"✅ {problem} "
-                        f"({status}) "
-                        f"[score {score}]"
+                        f"{problem} status {status}"
 
                     )
-
 
                 else:
 
 
                     summary.append(
 
-                        f"Kasus: {problem} "
-                        f"[score {score}]"
+                        f"Kasus: {problem}"
 
                     )
 
