@@ -1,0 +1,283 @@
+"""
+TripleSide AI Agent
+
+Context Ranker v1.1
+
+Intelligent memory relevance scoring.
+"""
+
+
+import re
+
+
+
+
+
+
+class ContextRanker:
+
+
+
+    def __init__(self):
+
+        pass
+
+
+
+
+
+
+    def normalize(
+        self,
+        text
+    ):
+
+        if not text:
+             return []
+
+
+        text = text.lower()
+
+
+        text = text.replace(
+            "_",
+            " "
+        )
+
+
+        return re.findall(
+            r"[a-z0-9]+",
+            text
+        )
+
+
+
+
+
+
+
+    def score(
+        self,
+        query,
+        memory
+    ):
+
+
+        query_text = query.lower()
+
+
+
+        problem = str(
+
+            memory.get(
+                "problem",
+                ""
+            )
+
+        ).lower()
+
+
+
+        cause = str(
+
+            memory.get(
+                "cause",
+                ""
+            )
+
+        ).lower()
+
+
+
+        solution = str(
+
+            memory.get(
+                "solution",
+                ""
+            )
+
+        ).lower()
+
+
+
+
+
+
+
+        score = 0.0
+
+
+
+
+
+
+        # --------------------------------
+        # Exact problem match
+        # --------------------------------
+
+        if problem and problem in query_text:
+
+
+            score += 0.7
+
+
+
+
+
+
+
+        # --------------------------------
+        # Keyword overlap
+        # --------------------------------
+
+        query_words = set(
+
+            self.normalize(
+                query
+            )
+
+        )
+
+
+        memory_words = set(
+
+            self.normalize(
+
+                " ".join(
+
+                    [
+
+                        problem,
+
+                        cause,
+
+                        solution
+
+                    ]
+
+                )
+
+            )
+
+        )
+
+
+
+        overlap = len(
+
+            query_words.intersection(
+                memory_words
+            )
+
+        )
+
+
+
+        if overlap:
+
+
+            score += min(
+
+                overlap * 0.1,
+
+                0.3
+
+            )
+
+
+
+
+
+
+
+        # --------------------------------
+        # Resolved cases bonus
+        # --------------------------------
+
+        if memory.get(
+            "status"
+        ) == "resolved":
+
+
+            score += 0.05
+
+
+
+
+
+
+
+        return round(
+
+            min(
+                score,
+                1.0
+            ),
+
+            2
+
+        )
+
+
+
+
+
+
+
+
+    def rank(
+        self,
+        query,
+        memories,
+        limit=5
+    ):
+
+
+        results = []
+
+
+
+        for memory in memories:
+
+
+            results.append(
+
+                {
+
+                    "score":
+
+                        self.score(
+
+                            query,
+
+                            memory
+
+                        ),
+
+
+                    "memory":
+
+                        memory
+
+                }
+
+            )
+
+
+
+
+
+        results.sort(
+
+            key=lambda x:
+
+                x["score"],
+
+
+            reverse=True
+
+        )
+
+
+
+        return results[:limit]

@@ -1,13 +1,14 @@
 """
 TripleSide AI Agent
 
-Context Ranker v1.0
+Context Ranker v1.1
 
-Ranks memories based on relevance.
+Intelligent memory relevance scoring.
 """
 
 
 import re
+
 
 
 
@@ -32,21 +33,29 @@ class ContextRanker:
         text
     ):
 
+
         if not text:
 
             return []
 
 
+
         text = text.lower()
 
 
-        words = re.findall(
-            r"[a-z0-9_]+",
-            text
+
+        text = text.replace(
+            "_",
+            " "
         )
 
 
-        return words
+
+        return re.findall(
+            r"[a-z0-9]+",
+            text
+        )
+
 
 
 
@@ -57,7 +66,7 @@ class ContextRanker:
     def score(
         self,
         query,
-        memory_text
+        memory
     ):
 
 
@@ -70,51 +79,176 @@ class ContextRanker:
         )
 
 
-        memory_words = set(
+
+        problem_words = set(
 
             self.normalize(
-                memory_text
+
+                memory.get(
+                    "problem",
+                    ""
+                )
+
             )
 
         )
 
 
 
-        if not query_words or not memory_words:
+        cause_words = set(
 
-            return 0
+            self.normalize(
+
+                memory.get(
+                    "cause",
+                    ""
+                )
+
+            )
+
+        )
+
+
+
+        solution_words = set(
+
+            self.normalize(
+
+                memory.get(
+                    "solution",
+                    ""
+                )
+
+            )
+
+        )
+
+
+
+        score = 0.0
 
 
 
 
 
 
+        # -----------------------------
+        # Problem match
+        # -----------------------------
 
-        overlap = (
+        if problem_words:
+
+
+            matched = len(
+
+                query_words.intersection(
+                    problem_words
+                )
+
+            )
+
+
+            if matched == len(problem_words):
+
+
+                score += 0.7
+
+
+
+
+
+
+        # -----------------------------
+        # Cause match
+        # -----------------------------
+
+        cause_match = len(
 
             query_words.intersection(
-                memory_words
+                cause_words
             )
 
         )
 
 
 
-        score = (
+        if cause_match:
 
-            len(overlap)
 
-            /
+            score += min(
 
-            len(query_words)
+                cause_match * 0.1,
+
+                0.2
+
+            )
+
+
+
+
+
+
+
+        # -----------------------------
+        # Solution match
+        # -----------------------------
+
+        solution_match = len(
+
+            query_words.intersection(
+                solution_words
+            )
 
         )
+
+
+
+        if solution_match:
+
+
+            score += min(
+
+                solution_match * 0.05,
+
+                0.1
+
+            )
+
+
+
+
+
+
+
+
+        # -----------------------------
+        # Resolved memory bonus
+        # -----------------------------
+
+        if memory.get(
+            "status"
+        ) == "resolved":
+
+
+            score += 0.05
+
+
+
 
 
 
         return round(
-            score,
+
+            min(
+
+                score,
+
+                1.0
+
+            ),
+
             2
+
         )
 
 
@@ -139,56 +273,6 @@ class ContextRanker:
         for memory in memories:
 
 
-            text = ""
-
-
-
-            if isinstance(
-                memory,
-                dict
-            ):
-
-
-                text = " ".join(
-
-                    [
-
-                        str(
-                            memory.get(
-                                "question",
-                                ""
-                            )
-                        ),
-
-                        str(
-                            memory.get(
-                                "problem",
-                                ""
-                            )
-                        ),
-
-                        str(
-                            memory.get(
-                                "cause",
-                                ""
-                            )
-                        )
-
-                    ]
-
-                )
-
-
-
-            value = self.score(
-
-                query,
-
-                text
-
-            )
-
-
 
             results.append(
 
@@ -196,7 +280,14 @@ class ContextRanker:
 
                     "score":
 
-                        value,
+                        self.score(
+
+                            query,
+
+                            memory
+
+                        ),
+
 
 
                     "memory":
@@ -211,14 +302,18 @@ class ContextRanker:
 
 
 
+
         results.sort(
 
             key=lambda x:
+
                 x["score"],
+
 
             reverse=True
 
         )
+
 
 
 
