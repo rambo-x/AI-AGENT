@@ -8,6 +8,7 @@ Features:
 - search previous cases
 - track incident status
 - resolve old problems
+- learn successful actions
 """
 
 
@@ -23,9 +24,12 @@ DEFAULT_MEMORY = {
     "created_at":
         datetime.now().isoformat(),
 
-    "cases": []
+    "cases": [],
+
+    "actions": []
 
 }
+
 
 
 
@@ -58,14 +62,12 @@ class MemoryFeedback:
 
 
 
-
     def load(self):
 
         return self.storage.load(
             "diagnostic_memory.json",
             DEFAULT_MEMORY
         )
-
 
 
 
@@ -81,7 +83,6 @@ class MemoryFeedback:
 
 
 
-
     def normalize(
         self,
         problem
@@ -90,7 +91,6 @@ class MemoryFeedback:
         return self.normalizer.normalize(
             problem
         )
-
 
 
 
@@ -148,40 +148,31 @@ class MemoryFeedback:
 
         case = {
 
-
             "timestamp":
                 datetime.now().isoformat(),
-
 
             "problem":
                 normalized,
 
-
             "category":
                 category,
-
 
             "cause":
                 cause,
 
-
             "solution":
                 solution,
-
 
             "status":
                 "active",
 
-
             "resolved_at":
                 None,
-
 
             "resolution":
                 None
 
         }
-
 
 
         data["cases"].append(
@@ -244,14 +235,11 @@ class MemoryFeedback:
                         problem
                     ),
 
-
                 "previous_cases_found":
                     len(existing),
 
-
                 "previous_cases":
                     existing,
-
 
                 "memory_status":
                     "known_problem"
@@ -271,18 +259,14 @@ class MemoryFeedback:
 
         return {
 
-
             "problem":
                 case["problem"],
-
 
             "previous_cases_found":
                 0,
 
-
             "previous_cases":
                 [],
-
 
             "memory_status":
                 "new_problem"
@@ -399,16 +383,237 @@ class MemoryFeedback:
 
         return {
 
-
             "total":
                 len(cases),
 
-
             "active":
                 active,
-
 
             "resolved":
                 resolved
 
         }
+
+
+
+
+    #
+    # Experience Learning
+    #
+
+
+    def record_action_result(
+        self,
+        problem,
+        action,
+        result
+    ):
+
+
+        data = self.load()
+
+
+        if "actions" not in data:
+
+            data["actions"] = []
+
+
+
+        found = None
+
+
+
+        for item in data["actions"]:
+
+
+            if (
+                item.get("problem") == problem
+                and
+                item.get("action") == action
+            ):
+
+                found = item
+
+                break
+
+
+
+
+        if not found:
+
+
+            found = {
+
+                "problem":
+                    problem,
+
+                "action":
+                    action,
+
+                "success":
+                    0,
+
+                "failed":
+                    0
+
+            }
+
+
+            data["actions"].append(
+                found
+            )
+
+
+
+
+        if result in (
+            "success",
+            "recovered",
+            "simulated"
+        ):
+
+            found["success"] += 1
+
+
+        else:
+
+            found["failed"] += 1
+
+
+
+
+        total = (
+            found["success"]
+            +
+            found["failed"]
+        )
+
+
+        found["success_rate"] = (
+
+            found["success"]
+            /
+            total
+
+            if total
+
+            else 0
+
+        )
+
+
+
+        self.save_database(
+            data
+        )
+
+
+        return found
+
+
+
+
+
+    def recommend_action(
+        self,
+        problem
+    ):
+
+
+        data = self.load()
+
+
+        candidates = []
+
+
+
+        for item in data.get(
+            "actions",
+            []
+        ):
+
+
+            if item.get(
+                "problem"
+            ) == problem:
+
+
+                candidates.append(
+                    item
+                )
+
+
+
+        if not candidates:
+
+
+            return {
+
+                "found":
+                    False
+
+            }
+
+
+
+
+
+        best = max(
+            candidates,
+            key=lambda x:
+                x.get(
+                    "success_rate",
+                    0
+                )
+        )
+
+
+
+        return {
+
+
+            "found":
+                True,
+
+
+            "problem":
+                problem,
+
+
+            "recommended_action":
+                best["action"],
+
+
+            "success_rate":
+                best.get(
+                    "success_rate",
+                    0
+                ),
+
+
+            "confidence":
+                min(
+                    best.get(
+                        "success",
+                        0
+                    )
+                    /
+                    5,
+                    1
+                )
+
+        }
+
+
+
+
+
+if __name__ == "__main__":
+
+
+    memory = MemoryFeedback()
+
+
+    print(
+        memory.statistics()
+    )
